@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HMB Agency - Nhà Sách Trực Tuyến & Giải Pháp Số</title>
+    <!-- Nhúng Font Awesome để hiển thị các icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- CẤU HÌNH HỆ THỐNG & MÀU CHỦ ĐẠO (NAVY & ĐỎ ĐÔ) --- */
@@ -31,9 +32,10 @@
             line-height: 1.6;
         }
 
+        /* --- KÍCH THƯỚC NỘI DUNG CHÍNH CHUẨN UI RỘNG RÃI --- */
         .container {
-            width: 90%;
-            max-width: 1200px;
+            width: 92%; 
+            max-width: 1300px; 
             margin: 0 auto;
         }
 
@@ -70,7 +72,6 @@
             font-weight: 400;
         }
 
-        /* Nút 3 gạch mặc định ẨN trên máy tính (Desktop) */
         .menu-toggle {
             display: none;
             background: none;
@@ -78,7 +79,7 @@
             color: var(--white);
             font-size: 24px;
             cursor: pointer;
-            z-index: 1100; /* Đảm bảo nổi trên lớp phủ di động */
+            z-index: 1100;
         }
 
         nav ul {
@@ -104,64 +105,11 @@
             color: #FFD700;
         }
 
-        /* Dropdown Menu Mega trên PC */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--white);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            padding: 20px;
-            min-width: 550px;
-            border-radius: 4px;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .dropdown-content::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 5px;
-            border-style: solid;
-            border-color: transparent transparent var(--white) transparent;
-        }
-
-        nav ul li:hover .dropdown-content {
-            display: grid;
-        }
-
-        .dropdown-col h4 {
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 4px;
-            font-size: 14px;
-        }
-
-        .dropdown-col a {
-            color: var(--text-color) !important;
-            display: block;
-            padding: 4px 0;
-            font-size: 13px;
-            text-decoration: none;
-        }
-
-        .dropdown-col a:hover {
-            color: var(--accent-color) !important;
-            padding-left: 4px;
-        }
-
-        /* --- BANNER --- */
+        /* --- BANNER CHÀO HÈ --- */
         .hero-banner {
             background: linear-gradient(135deg, #13315C, #0B2545);
             color: var(--white);
-            padding: 60px 0;
+            padding: 30px 0;
             text-align: center;
         }
 
@@ -201,14 +149,14 @@
         }
 
         .tabs-section {
-            padding: 50px 0 30px;
+            padding: 50px 0 10px 0;
         }
 
         .tab-headers {
             display: flex;
             justify-content: center;
             border-bottom: 2px solid var(--border);
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .tab-btn {
@@ -236,7 +184,26 @@
             height: 2px;
             background-color: var(--primary-color);
         }
-
+/* Styling cho thanh tìm kiếm */
+        .search-section { padding: 30px 0; display: flex; justify-content: center; }
+        .search-wrapper { position: relative; width: 100%; max-width: 600px; }
+        .search-input { 
+            width: 100%; 
+            padding: 12px 20px 12px 45px; 
+            font-size: 15px; 
+            border: 2px solid var(--primary-color); 
+            border-radius: 25px; 
+            outline: none; 
+            transition: 0.3s; 
+        }
+        .search-input:focus { border-color: var(--accent-color); }
+        .search-icon { 
+            position: absolute; 
+            left: 18px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            color: var(--gray); 
+        }
         .countdown {
             display: inline-flex;
             align-items: center;
@@ -249,11 +216,14 @@
             font-weight: bold;
         }
 
-        /* Điều khiển ẩn hiện danh sách theo Tab */
+        .book-grid, .book-grid-fixed {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px; 
+        }
+
         .book-grid {
             display: none; 
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
             animation: fadeIn 0.4s ease-in-out;
         }
 
@@ -266,11 +236,28 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Hệ thống kệ sách cố định */
+        .bookshelf-section {
+            padding: 10px 0 60px 0;
+        }
+
+        .shelf-title {
+            font-size: 24px; 
+            color: var(--primary-color);
+            margin: 50px 0 25px 0;
+            border-left: 6px solid var(--primary-color);
+            padding-left: 15px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Card Sách Chung */
         .book-card {
             background: var(--white);
             border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 4px;
+            padding: 20px; 
+            border-radius: 8px;
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
@@ -278,20 +265,20 @@
         }
 
         .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(11, 37, 69, 0.08);
         }
 
         .book-img-box {
             position: relative;
             background-color: var(--bg-light);
             padding: 15px;
-            height: 240px;
+            height: 260px; 
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
-            border-radius: 2px;
+            margin-bottom: 18px;
+            border-radius: 6px;
             cursor: pointer;
         }
 
@@ -299,25 +286,26 @@
             max-height: 100%;
             max-width: 100%;
             object-fit: contain;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.12);
         }
 
         .book-info h3 {
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             height: 44px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             color: var(--text-color);
+            line-height: 1.4;
         }
 
         .book-author {
-            font-size: 12px;
+            font-size: 12.5px;
             color: var(--gray);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .price-box {
@@ -327,13 +315,13 @@
         .current-price {
             color: var(--accent-color);
             font-weight: bold;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .old-price {
             color: var(--gray);
             text-decoration: line-through;
-            font-size: 12px;
+            font-size: 12.5px;
             margin-left: 6px;
         }
 
@@ -358,10 +346,10 @@
         .btn-outline { background-color: transparent; color: var(--primary-color); border: 1px solid var(--primary-color); }
         .btn-fill { background-color: var(--primary-color); color: var(--white); }
 
-        /* --- MÀN HÌNH 2: CHI TIẾT SÁCH --- */
+        /* --- MAN HINH 2: CHI TIẾT SÁCH (SPA) --- */
         #detail-page-view {
             display: none; 
-            padding: 40px 0 60px 0;
+            padding: 50px 0 80px 0;
             background-color: #FAFAFA;
         }
 
@@ -372,62 +360,115 @@
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 600;
-            font-size: 14.5px;
+            font-size: 15px;
             margin-bottom: 25px;
             background: none;
             border: none;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: color 0.2s;
         }
 
-        .back-to-home-btn:hover { transform: translateX(-4px); color: var(--accent-color); }
+        .back-to-home-btn:hover { color: var(--accent-color); }
 
         .detail-wrapper {
             display: grid;
-            grid-template-columns: 50% 50%;
+            grid-template-columns: 48% 52%; 
             gap: 50px;
-            background-color: var(--white);
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(11, 37, 69, 0.06);
+            background-color: transparent; 
+            padding: 10px 0; 
+            border-radius: 0;
+            box-shadow: none; 
+            border: none; 
         }
 
         .modal-gallery { display: flex; flex-direction: column; gap: 20px; }
+        
         .main-img {
-            background-color: #FAFAFA; padding: 40px; text-align: center; border-radius: 16px;
-            border: 1px solid rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: center; min-height: 460px;
+            background-color: #FFFFFF; 
+            padding: 40px; 
+            text-align: center; 
+            border-radius: 16px;
+            border: 1px solid var(--border); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 480px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.02); 
         }
+        
         .main-img img {
-            max-height: 420px; max-width: 100%; object-fit: contain;
-            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.18)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+            max-height: 400px; 
+            max-width: 100%; 
+            object-fit: contain;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.12));
         }
 
         .thumb-imgs { display: flex; gap: 15px; justify-content: center; }
         .thumb-imgs div { width: 75px; height: 75px; background: var(--white); border: 1px solid var(--border); padding: 5px; border-radius: 10px; }
         .thumb-imgs img { width: 100%; height: 100%; object-fit: contain; }
 
-        .info-detail h1 { font-size: 26px; font-weight: 700; color: var(--primary-color); line-height: 1.3; margin-bottom: 10px; }
+        .info-detail {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .info-detail h1 { 
+            font-size: 30px; 
+            font-weight: 700; 
+            color: var(--primary-color); 
+            line-height: 1.3; 
+            margin-bottom: 12px; 
+        }
+        
         .modal-book-author { font-size: 15px; color: var(--gray); font-weight: 500; margin-bottom: 25px; }
 
         .blurb-box {
-            background-color: var(--bg-light); padding: 20px; border-left: 4px solid var(--primary-color);
-            margin-bottom: 30px; font-size: 14.5px; color: #4A5568; border-radius: 0 10px 10px 0; line-height: 1.6;
+            background-color: #FFFFFF; 
+            padding: 22px; 
+            border-left: 4px solid var(--primary-color);
+            border-top: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px; 
+            font-size: 15px; 
+            color: #4A5568; 
+            border-radius: 0 10px 10px 0; 
+            line-height: 1.6;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
         }
 
         .meta-info-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 30px; padding: 25px 0;
-            border-top: 1px dashed var(--border); border-bottom: 1px dashed var(--border); margin-bottom: 35px;
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 20px 40px; 
+            padding: 25px 0;
+            border-top: 1px dashed var(--border); 
+            border-bottom: 1px dashed var(--border); 
+            margin-bottom: 35px;
         }
-        .meta-item { display: flex; justify-content: space-between; font-size: 14px; }
-        .meta-label { color: var(--gray); }
-        .meta-value { color: var(--text-color); font-weight: 600; text-align: right; padding-left: 10px; }
+        
+        .meta-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-size: 14.5px; 
+        }
+        
+        .meta-label { color: var(--gray); font-weight: 400; }
+        
+        .meta-value { 
+            color: var(--text-color); 
+            font-weight: 600; 
+            text-align: right; 
+            padding-left: 15px; 
+        }
 
         .detail-action-box { display: grid; grid-template-columns: 1fr 1.2fr; gap: 15px; }
         .detail-action-box .btn { padding: 16px; font-size: 15px; border-radius: 10px; }
         .detail-action-box .btn-fill { background-color: var(--accent-color); }
 
-        /* --- FOOTER --- */
-        footer { background-color: var(--primary-color); color: #e2e8f0; padding: 60px 0 20px 0; border-top: 4px solid var(--accent-color); }
+       footer { background-color: var(--primary-color); color: #e2e8f0; padding: 60px 0 20px 0; border-top: 4px solid var(--accent-color); }
         .footer-grid-pro { display: flex; justify-content: space-between; gap: 40px; }
         .footer-col { flex: 1; }
         .footer-col.brand { flex: 1.5; }
@@ -444,134 +485,64 @@
         .footer-bottom-pro { margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; }
         .footer-bottom-pro a { color: var(--text-muted); text-decoration: none; margin-left: 20px; }
 
-        /* =======================================================
-           --- HỆ THỐNG RESPONSIVE & MOBILE HAMBURGER MENU --- 
-           ======================================================= */
-        @media (max-width: 1200px) {
-            .detail-wrapper { gap: 30px; }
-            .main-img { min-height: 380px; }
-        }
+        /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
-            .book-grid { grid-template-columns: repeat(3, 1fr); }
-            .detail-wrapper { grid-template-columns: 45% 55%; gap: 25px; padding: 30px; }
-            .main-img { min-height: 320px; padding: 20px; }
-            .main-img img { max-height: 280px; }
+            .book-grid, .book-grid-fixed { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+            .detail-wrapper { grid-template-columns: 1fr; gap: 35px; padding: 10px; }
+            .main-img { min-height: 360px; }
         }
         @media (max-width: 768px) {
-            /* Hiện nút 3 gạch */
-            .menu-toggle {
-                display: block;
-            }
-
-            /* Biến nav menu thành sidebar vuốt trượt từ phải qua trái trên Mobile */
-            nav {
-                position: fixed;
-                top: 0;
-                right: -100%; /* Mặc định giấu sang bên phải */
-                width: 280px;
-                height: 100vh;
-                background-color: var(--primary-color);
-                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-                padding: 80px 30px 30px 30px;
-                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-                z-index: 1050;
-            }
-
-            /* Class kích hoạt mở menu trượt ra */
-            nav.open {
-                right: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            nav ul li {
-                margin-left: 0;
-                margin-bottom: 25px;
-                width: 100%;
-            }
-
-            nav ul li a {
-                font-size: 18px; /* Chữ to hơn trên điện thoại để dễ click */
-                display: block;
-                padding: 5px 0;
-            }
-
-            /* Tắt tính năng Mega Menu cũ trên mobile */
-            .dropdown-content {
-                display: none !important; 
-            }
-
-            /* Responsive các khu vực khác */
+            .menu-toggle { display: block; }
+            nav { position: fixed; top: 0; right: -100%; width: 260px; height: 100vh; background-color: var(--primary-color); padding: 80px 30px; transition: right 0.4s ease; z-index: 1050; }
+            nav.open { right: 0; }
+            nav ul { flex-direction: column; align-items: flex-start; }
+            nav ul li { margin-left: 0; margin-bottom: 20px; }
             .hero-banner h1 { font-size: 26px; }
             .tab-headers { overflow-x: auto; justify-content: flex-start; white-space: nowrap; padding-bottom: 5px; }
-            .book-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .book-grid, .book-grid-fixed { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .book-img-box { height: 180px; }
             .footer-grid-pro { flex-direction: column; gap: 35px; }
-            .footer-bottom-pro { flex-direction: column; text-align: center; gap: 12px; }
-            .detail-wrapper { grid-template-columns: 1fr; gap: 20px; padding: 25px 20px; }
-            .main-img { min-height: 220px; }
-            .main-img img { max-height: 200px; }
-            .meta-info-grid { grid-template-columns: 1fr; gap: 10px; }
-            .detail-action-box { grid-template-columns: 1fr; }
+            .detail-wrapper { padding: 25px 20px; }
+            .main-img { min-height: 220px; } .main-img img { max-height: 200px; }
+            .meta-info-grid { grid-template-columns: 1fr; gap: 12px; } .detail-action-box { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
+    <!-- --- HEADER --- -->
     <header>
         <div class="container header-container">
             <div class="logo" onclick="navigateToHome()">HMB<span>Agency</span></div>
-            
             <button class="menu-toggle" id="menuToggleBtn" onclick="toggleMobileMenu()">
                 <i class="fa-solid fa-bars"></i>
             </button>
-
-            <nav id="mobileNav">
-                <ul>
-                    <li><a href="#" onclick="navigateToHomeAndCloseMenu()">Trang Chủ</a></li>
-                    <li>
-                        <a href="#">Sách Trong Nước ▼</a>
-                        <div class="dropdown-content">
-                            <div class="dropdown-col">
-                                <h4>Văn học / Kinh tế</h4>
-                                <a href="#">Tiểu thuyết</a><a href="#">Truyện ngắn</a>
-                                <a href="#">Quản trị</a><a href="#">Khởi nghiệp</a>
-                            </div>
-                            <div class="dropdown-col">
-                                <h4>Kỹ năng / Thiếu nhi</h4>
-                                <a href="#">Phát triển bản thân</a><a href="#">Tâm lý học</a>
-                                <a href="#">Truyện tranh</a><a href="#">Nuôi dạy con</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="#">Sách Nước Ngoài ▼</a></li>
-                    <li><a href="#">Văn phòng phẩm & Quà tặng</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
-    <section class="hero-banner">
-        <div class="container">
-            <h1>HỘI SÁCH CHÀO HÈ 2026 - HMB AGENCY</h1>
-            <p>Khám phá thế giới tri thức vô tận cùng hệ thống phân phối sách công nghệ thế hệ mới.</p>
-            <div class="promo-badge">Ưu Đãi Lên Đến 50%</div>
-        </div>
-    </section>
-
+    <!-- =======================================================
+         --- MÀN HÌNH 1: TRANG CHỦ (CHỨA CẢ BANNER CHÀO HÈ) --- 
+         ======================================================= -->
     <main id="homepage-view">
+        
+        <!-- ĐƯA BANNER VÀO BÊN TRONG TRANG CHỦ ĐỂ ẨN ĐI KHI XEM CHI TIẾT SÁCH -->
+        <section class="hero-banner">
+            <div class="container">
+                <h1>HỘI SÁCH CHÀO HÈ 2026 - HMB AGENCY</h1>
+                <div class="promo-badge">Ưu Đãi Lên Đến 50%</div>
+            </div>
+        </section>
+
+        <!-- PHẦN A: KHỐI SÁCH XOAY TUA ĐỊNH KỲ SAU 7 GIÂY -->
         <section class="tabs-section">
             <div class="container">
-                
                 <div class="tab-headers">
                     <button class="tab-btn active" onclick="handleTabClick(0)">Sách Mới Phát Hành</button>
                     <button class="tab-btn" onclick="handleTabClick(1)">Sách Bán Chạy</button>
                     <button class="tab-btn" onclick="handleTabClick(2)">Ưu Đãi Trong Ngày <span class="countdown">02:45:12</span></button>
                 </div>
 
+                <!-- --- TAB 0: SÁCH MỚI PHÁT HÀNH --- -->
                 <div class="book-grid active" id="grid-tab-0">
                     <div class="book-card">
                         <div>
@@ -594,66 +565,67 @@
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Rừng Na Uy - Ấn Bản Kỷ Niệm', 'Haruki Murakami', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Tác phẩm kinh điển khắc họa sâu sắc những hoài niệm, tình yêu và nỗi cô đơn lạc lối của tuổi trẻ thế hệ trước.', 'Trịnh Lữ', 'NXB Hội Nhà Văn', 'Nhã Nam', '2026', '15 x 24 cm', 'Bìa mềm có cánh', '450 trang')">
-                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Kỷ Nguyên Trí Tuệ Nhân Tạo 2026', 'Kai-Fu Lee', 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80', 'Góc nhìn chiến lược về sự phát triển trí tuệ nhân tạo đột phá toàn cầu.', 'Lê Đình Chi', 'NXB Thông Tin', 'HMB Media', '2026', '16 x 24 cm', 'Bìa cứng', '420 trang')">
+                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" alt="AI">
                             </div>
                             <div class="book-info">
-                                <h3>Rừng Na Uy (Tiểu thuyết) - Ấn Bản Kỷ Niệm 2026</h3>
-                                <p class="book-author">Haruki Murakami</p>
+                                <h3>Kỷ Nguyên Trí Tuệ Nhân Tạo và Tương Lai Nhân Loại</h3>
+                                <p class="book-author">Kai-Fu Lee</p>
                             </div>
                         </div>
                         <div>
-                            <div class="price-box"><span class="current-price">148.000 đ</span><span class="old-price">185.000 đ</span></div>
+                            <div class="price-box"><span class="current-price">185.000 đ</span><span class="old-price">220.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Rừng Na Uy - Ấn Bản Kỷ Niệm', 'Haruki Murakami', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Tác phẩm kinh điển khắc họa sâu sắc những hoài niệm, tình yêu và nỗi cô đơn lạc lối của tuổi trẻ thế hệ trước.', 'Trịnh Lữ', 'NXB Hội Nhà Văn', 'Nhã Nam', '2026', '15 x 24 cm', 'Bìa mềm', '450 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Kỷ Nguyên Trí Tuệ Nhân Tạo 2026', 'Kai-Fu Lee', 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80', 'Góc nhìn chiến lược về sự phát triển trí tuệ nhân tạo đột phá toàn cầu.', 'Lê Đình Chi', 'NXB Thông Tin', 'HMB Media', '2026', '16 x 24 cm', 'Bìa cứng', '420 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Kính Vạn Hoa - Tập 1 (Ấn bản mới)', 'Nguyễn Nhật Ánh', 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80', 'Bộ truyện học trò gắn liền với tuổi thơ bao thế hệ Việt Nam, ghi lại những câu chuyện phá án vui nhộn, ấm áp.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2025', '13 x 20 cm', 'Bìa mềm', '280 trang')">
-                                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Chiến Lược Marketing Đột Phá B2B', 'Philip Kotler', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80', 'Cẩm nang marketing từ cha đẻ Kotler.', 'Trần Thanh Hải', 'NXB Công Thương', 'Nhất Nam', '2025', '14.5 x 20.5 cm', 'Bìa mềm', '315 trang')">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80" alt="Marketing">
                             </div>
                             <div class="book-info">
-                                <h3>Kính Vạn Hoa - Tập 1: Quyển Sách Kỳ Bí (Ấn Bản Mới)</h3>
-                                <p class="book-author">Nguyễn Nhật Ánh</p>
+                                <h3>Chiến Lược Marketing Đột Phá Cho Doanh Nghiệp B2B</h3>
+                                <p class="book-author">Philip Kotler</p>
                             </div>
                         </div>
                         <div>
-                            <div class="price-box"><span class="current-price">76.000 đ</span><span class="old-price">95.000 đ</span></div>
+                            <div class="price-box"><span class="current-price">165.000 đ</span><span class="old-price">195.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Kính Vạn Hoa - Tập 1 (Ấn bản mới)', 'Nguyễn Nhật Ánh', 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80', 'Bộ truyện học trò gắn liền với tuổi thơ bao thế hệ Việt Nam, ghi lại những câu chuyện phá án vui nhộn, ấm áp.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2025', '13 x 20 cm', 'Bìa mềm', '280 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Chiến Lược Marketing Đột Phá B2B', 'Philip Kotler', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80', 'Cẩm nang marketing từ cha đẻ Kotler.', 'Trần Thanh Hải', 'NXB Công Thương', 'Nhất Nam', '2025', '14.5 x 20.5 cm', 'Bìa mềm', '315 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Project Hail Mary (English Edition)', 'Andy Weir', 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80', 'An interstellar sci-fi thriller about a lone astronaut who must save humanity from an extinction-level threat.', 'Nguyên bản tiếng Anh', 'Ballantine Books', 'HMB Import', '2024', '11 x 18 cm', 'Bìa mềm pocket', '496 trang')">
-                                <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Nghệ Thuật Quản Trị Nhân Sự Cấp Cao', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=400&q=80', 'Các phương pháp phát triển nguồn nhân lực.', 'Phan Anh', 'NXB Lao Động', 'Alpha Books', '2025', '13 x 20.5 cm', 'Bìa mềm', '290 trang')">
+                                <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=400&q=80" alt="HR">
                             </div>
                             <div class="book-info">
-                                <h3>Project Hail Mary - Sci-Fi Foreign Fiction</h3>
-                                <p class="book-author">Andy Weir</p>
+                                <h3>Nghệ Thuật Quản Trị Nhân Sự Cấp Cao Doanh Nghiệp</h3>
+                                <p class="book-author">Nhiều Tác Giả</p>
                             </div>
                         </div>
                         <div>
-                            <div class="price-box"><span class="current-price">235.000 đ</span><span class="old-price">290.000 đ</span></div>
+                            <div class="price-box"><span class="current-price">112.000 đ</span><span class="old-price">140.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Project Hail Mary (English Edition)', 'Andy Weir', 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80', 'An interstellar sci-fi thriller about a lone astronaut who must save humanity from an extinction-level threat.', 'Nguyên bản tiếng Anh', 'Ballantine Books', 'HMB Import', '2024', '11 x 18 cm', 'Bìa mềm pocket', '496 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Nghệ Thuật Quản Trị Nhân Sự Cấp Cao', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=400&q=80', 'Các phương pháp phát triển nguồn nhân lực.', 'Phan Anh', 'NXB Lao Động', 'Alpha Books', '2025', '13 x 20.5 cm', 'Bìa mềm', '290 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- --- TAB 1: SÁCH BÁN CHẠY --- -->
                 <div class="book-grid" id="grid-tab-1">
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Tâm Lý Học Về Tiền - Kiếm Tiền, Giữ Tiền Và Hạnh Phúc', 'Morgan Housel', 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80', 'Cuốn sách khám phá mối quan hệ hành vi của con người với tiền bạc, mang lại góc nhìn tỉnh táo về tài chính.', 'Trần Văn B', 'NXB Lao Động', 'Alpha Books', '2024', '13 x 20.5 cm', 'Bìa mềm', '320 trang')">
+                            <div class="book-img-box" onclick="navigateToDetail('Tâm Lý Học Về Tiền', 'Morgan Housel', 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80', 'Cuốn sách khám phá mối quan hệ hành vi của con người với tiền bạc, mang lại góc nhìn tỉnh táo về tài chính.', 'Trần Văn B', 'NXB Lao Động', 'Alpha Books', '2024', '13 x 20.5 cm', 'Bìa mềm', '320 trang')">
                                 <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
                             </div>
                             <div class="book-info">
@@ -665,53 +637,53 @@
                             <div class="price-box"><span class="current-price">142.000 đ</span><span class="old-price">189.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Tâm Lý Học Về Tiền - Kiếm Tiền, Giữ Tiền Và Hạnh Phúc', 'Morgan Housel', 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80', 'Cuốn sách khám phá mối quan hệ hành vi của con người với tiền bạc, mang lại góc nhìn tỉnh táo về tài chính.', 'Trần Văn B', 'NXB Lao Động', 'Alpha Books', '2024', '13 x 20.5 cm', 'Bìa mềm', '320 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Tâm Lý Học Về Tiền', 'Morgan Housel', 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80', 'Cuốn sách khám phá mối quan hệ hành vi của con người với tiền bạc, mang lại góc nhìn tỉnh táo về tài chính.', 'Trần Văn B', 'NXB Lao Động', 'Alpha Books', '2024', '13 x 20.5 cm', 'Bìa mềm', '320 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Hiệu Ứng Chim Mồi Trong Kinh Doanh', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Cuốn sách phân tích các đòn tâm lý học hành vi được áp dụng tinh vi trong marketing để thay đổi quyết định mua sắm.', 'Phạm Thanh Hương', 'NXB Công Thương', 'Nhất Nam', '2024', '14 x 20 cm', 'Bìa mềm', '215 trang')">
-                                <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Tư Duy Ngược', 'Nguyễn Anh Dũng', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Cuốn sách giúp bẻ gãy lối mòn tư duy thông thường.', 'Không có', 'NXB Văn Học', 'Sống', '2025', '13 x 19 cm', 'Bìa mềm', '260 trang')">
+                                <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" alt="Tư duy">
                             </div>
                             <div class="book-info">
-                                <h3>Hiệu Ứng Chim Mồi - Nghệ Thuật Định Giá Trong Marketing</h3>
-                                <p class="book-author">Nhiều Tác Giả</p>
+                                <h3>Tư Duy Ngược - Phá Vỡ Mọi Giới Hạn Lối Mòn Cũ</h3>
+                                <p class="book-author">Nguyễn Anh Dũng</p>
                             </div>
                         </div>
                         <div>
-                            <div class="price-box"><span class="current-price">79.000 đ</span><span class="old-price">98.000 đ</span></div>
+                            <div class="price-box"><span class="current-price">88.000 đ</span><span class="old-price">110.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Hiệu Ứng Chim Mồi Trong Kinh Doanh', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Cuốn sách phân tích các đòn tâm lý học hành vi được áp dụng tinh vi trong marketing để thay đổi quyết định mua sắm.', 'Phạm Thanh Hương', 'NXB Công Thương', 'Nhất Nam', '2024', '14 x 20 cm', 'Bìa mềm', '215 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Tư Duy Ngược', 'Nguyễn Anh Dũng', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Cuốn sách giúp bẻ gãy lối mòn tư duy thông thường.', 'Không có', 'NXB Văn Học', 'Sống', '2025', '13 x 19 cm', 'Bìa mềm', '260 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Tìm Lại Bình Yên Trong Từng Giờ Phút Tản Văn Chữa Lành', 'Nhiều tác giả', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Tuyển tập tản văn sâu lắng xoa dịu những áp lực tinh thần cho người trẻ trong xã hội bộn bề.', 'Phan Thị C', 'NXB Văn Học', 'Skybooks', '2025', '12 x 19 cm', 'Bìa mềm', '240 trang')">
-                                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Sapiens đồ họa tập 1', 'Yuval Noah Harari', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Ấn bản truyện tranh tóm lược hành trình tiến hóa nhân loại.', 'Nguyễn Thủy Cơ', 'NXB Thế Giới', 'Nhã Nam', '2024', '18 x 25 cm', 'Bìa mềm', '245 trang')">
+                                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Sapiens">
                             </div>
                             <div class="book-info">
-                                <h3>Tìm Lại Bình Yên Trong Từng Giờ Phút Tản Văn Chữa Lành</h3>
-                                <p class="book-author">Nhiều tác giả</p>
+                                <h3>Sapiens: Lược Sử Loài Người Bằng Tranh (Tập 1)</h3>
+                                <p class="book-author">Yuval Noah Harari</p>
                             </div>
                         </div>
                         <div>
-                            <div class="price-box"><span class="current-price">85.000 đ</span><span class="old-price">110.000 đ</span></div>
+                            <div class="price-box"><span class="current-price">196.000 đ</span><span class="old-price">250.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Tìm Lại Bình Yên Trong Từng Giờ Phút Tản Văn Chữa Lành', 'Nhiều tác giả', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Tuyển tập tản văn sâu lắng xoa dịu những áp lực tinh thần cho người trẻ trong xã hội bộn bề.', 'Phan Thị C', 'NXB Văn Học', 'Skybooks', '2025', '12 x 19 cm', 'Bìa mềm', '240 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Sapiens đồ họa tập 1', 'Yuval Noah Harari', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Ấn bản truyện tranh tóm lược hành trình tiến hóa nhân loại.', 'Nguyễn Thủy Cơ', 'NXB Thế Giới', 'Nhã Nam', '2024', '18 x 25 cm', 'Bìa mềm', '245 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Giáo Trình Hán Ngữ Tích Hợp - Tập 1', 'Đại Học Ngôn Ngữ Bắc Kinh', 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80', 'Giáo trình chuẩn hóa cung cấp hệ thống từ vựng, ngữ pháp cơ bản dành cho người bắt đầu tự học tiếng Trung.', 'Đội ngũ chuyên gia', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '19 x 26 cm', 'Bìa mềm', '310 trang')">
-                                <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80" alt="Bìa sách Hán ngữ">
+                            <div class="book-img-box" onclick="navigateToDetail('Giáo Trình Hán Ngữ Tập 1', 'Đại Học Bắc Kinh', 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80', 'Học từ vựng giao tiếp cơ bản.', 'Đội ngũ chuyên gia', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '19 x 26 cm', 'Bìa mềm', '310 trang')">
+                                <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80" alt="Hán ngữ">
                             </div>
                             <div class="book-info">
                                 <h3>Giáo Trình Hán Ngữ Tích Hợp - Tự Học Toàn Diện Tập 1</h3>
@@ -722,17 +694,18 @@
                             <div class="price-box"><span class="current-price">135.000 đ</span><span class="old-price">168.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Giáo Trình Hán Ngữ Tích Hợp - Tập 1', 'Đại Học Ngôn Ngữ Bắc Kinh', 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80', 'Giáo trình chuẩn hóa cung cấp hệ thống từ vựng, ngữ pháp cơ bản dành cho người bắt đầu tự học tiếng Trung.', 'Đội ngũ chuyên gia', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '19 x 26 cm', 'Bìa mềm', '310 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Giáo Trình Hán Ngữ Tập 1', 'Đại Học Bắc Kinh', 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80', 'Học từ vựng giao tiếp cơ bản.', 'Đội ngũ chuyên gia', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '19 x 26 cm', 'Bìa mềm', '310 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- --- TAB 2: ƯU ĐÃI TRONG NGÀY --- -->
                 <div class="book-grid" id="grid-tab-2">
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Atomic Habits: Thay Đổi Tí Hon, Hiệu Quả Bất Ngờ', 'James Clear', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'Phương pháp xây dựng hệ thống thói quen tốt từ những hành động nhỏ nhặt tích lũy mỗi ngày.', 'Lê Hoàng D', 'NXB Trẻ', 'NXB Trẻ', '2024', '14.5 x 20.5 cm', 'Bìa cứng', '416 trang')">
-                                <img src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Atomic Habits', 'James Clear', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'Xây dựng thói quen tốt hiệu quả bền vững.', 'Lê Hoàng D', 'NXB Trẻ', 'NXB Trẻ', '2024', '14.5 x 20.5 cm', 'Bìa cứng', '416 trang')">
+                                <img src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80" alt="Atomic Habits">
                             </div>
                             <div class="book-info">
                                 <h3>Atomic Habits: Thay Đổi Tí Hon, Hiệu Quả Bất Ngờ</h3>
@@ -743,56 +716,56 @@
                             <div class="price-box"><span class="current-price">100.000 đ</span><span class="old-price">200.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Atomic Habits: Thay Đổi Tí Hon, Hiệu Quả Bất Ngờ', 'James Clear', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'Phương pháp xây dựng hệ thống thói quen tốt từ những hành động nhỏ nhặt tích lũy mỗi ngày.', 'Lê Hoàng D', 'NXB Trẻ', 'NXB Trẻ', '2024', '14.5 x 20.5 cm', 'Bìa cứng', '416 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Atomic Habits', 'James Clear', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'Xây dựng thói quen tốt hiệu quả bền vững.', 'Lê Hoàng D', 'NXB Trẻ', 'NXB Trẻ', '2024', '14.5 x 20.5 cm', 'Bìa cứng', '416 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Y Học Dinh Dưỡng - Những Điều Bác Sĩ Không Nói Với Bạn', 'Ray D. Strand', 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80', 'Cuốn sách làm sáng tỏ sức mạnh khôi phục sức khỏe của cơ thể thông qua bổ sung dinh dưỡng tối ưu chủ động.', 'Nguyễn Việt Long', 'NXB Hồng Đức', 'HMB Edu', '2025', '14 x 20.5 cm', 'Bìa mềm', '340 trang')">
-                                <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Đắc Nhân Tâm', 'Dale Carnegie', 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80', 'Nghệ thuật thu phục lòng người đỉnh cao.', 'Nguyễn Văn Phước', 'NXB Tổng Hợp', 'First News', '2025', '15 x 23 cm', 'Bìa cứng', '320 trang')">
+                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80" alt="Carnegie">
                             </div>
                             <div class="book-info">
-                                <h3>Y Học Dinh Dưỡng - Bảo Vệ Tối Ưu Sức Khỏe Chủ Động</h3>
-                                <p class="book-author">Ray D. Strand</p>
+                                <h3>Đắc Nhân Tâm - Nghệ Thuật Ứng Xử Căn Bản</h3>
+                                <p class="book-author">Dale Carnegie</p>
                             </div>
                         </div>
                         <div>
-                            <div class="price-box"><span class="current-price">95.000 đ</span><span class="old-price">190.000 đ</span></div>
+                            <div class="price-box"><span class="current-price">62.000 đ</span><span class="old-price">124.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Y Học Dinh Dưỡng - Những Điều Bác Sĩ Không Nói Với Bạn', 'Ray D. Strand', 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80', 'Cuốn sách làm sáng tỏ sức mạnh khôi phục sức khỏe của cơ thể thông qua bổ sung dinh dưỡng tối ưu chủ động.', 'Nguyễn Việt Long', 'NXB Hồng Đức', 'HMB Edu', '2025', '14 x 20.5 cm', 'Bìa mềm', '340 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Đắc Nhân Tâm', 'Dale Carnegie', 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80', 'Nghệ thuật thu phục lòng người đỉnh cao.', 'Nguyễn Văn Phước', 'NXB Tổng Hợp', 'First News', '2025', '15 x 23 cm', 'Bìa cứng', '320 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Vô Cùng Tàn Nhẫn Vô Cùng Yêu Thương', 'Sara Imas', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Phương pháp giáo dục con cái kết hợp đỉnh cao giữa tình yêu thương dịu dàng và kỷ luật thép của người mẹ Do Thái.', 'Hàn Phong', 'NXB Dân Trí', 'Alpha Books', '2024', '13.5 x 20.5 cm', 'Bìa mềm', '410 trang')">
-                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Khởi Nghiệp Bán Hàng Shopee', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80', 'Chiến lược e-commerce kinh doanh nghìn đơn.', 'Không có', 'NXB Thanh Niên', 'HMB Digital', '2025', '14 x 20.5 cm', 'Bìa mềm', '270 trang')">
+                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80" alt="Ecom">
                             </div>
                             <div class="book-info">
-                                <h3>Vô Cùng Tàn Nhẫn Vô Cùng Yêu Thương (Nuôi Dạy Con)</h3>
-                                <p class="book-author">Sara Imas</p>
+                                <h3>Khởi Nghiệp Bán Hàng E-Commerce Shopee Thực Chiến</h3>
+                                <p class="book-author">Nhiều Tác Giả</p>
                             </div>
                         </div>
                         <div>
-                            <div class="price-box"><span class="current-price">69.000 đ</span><span class="old-price">138.000 đ</span></div>
+                            <div class="price-box"><span class="current-price">75.000 đ</span><span class="old-price">150.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Vô Cùng Tàn Nhẫn Vô Cùng Yêu Thương', 'Sara Imas', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Phương pháp giáo dục con cái kết hợp đỉnh cao giữa tình yêu thương dịu dàng và kỷ luật thép của người mẹ Do Thái.', 'Hàn Phong', 'NXB Dân Trí', 'Alpha Books', '2024', '13.5 x 20.5 cm', 'Bìa mềm', '410 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Khởi Nghiệp Bán Hàng Shopee', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80', 'Chiến lược e-commerce kinh doanh nghìn đơn.', 'Không có', 'NXB Thanh Niên', 'HMB Digital', '2025', '14 x 20.5 cm', 'Bìa mềm', '270 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-card">
                         <div>
-                            <div class="book-img-box" onclick="navigateToDetail('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'A provocative and grand narrative exploring the history of human species from evolution to modern global empires.', 'Nguyên bản tiếng Anh', 'Harper Perennial', 'HMB Import', '2023', '13 x 20 cm', 'Bìa mềm', '512 trang')">
-                                <img src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            <div class="book-img-box" onclick="navigateToDetail('Sapiens English Edition', 'Yuval Harari', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'A grand overview of humanity evolution history.', 'Nguyên bản tiếng Anh', 'Harper', 'HMB Import', '2023', '13 x 20 cm', 'Bìa mềm', '512 trang')">
+                                <img src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80" alt="English Sapiens">
                             </div>
                             <div class="book-info">
-                                <h3>Sapiens: A Brief History of Humankind (Non-fiction)</h3>
+                                <h3>Sapiens: A Brief History of Humankind (Fiction/Non)</h3>
                                 <p class="book-author">Yuval Noah Harari</p>
                             </div>
                         </div>
@@ -800,21 +773,537 @@
                             <div class="price-box"><span class="current-price">185.000 đ</span><span class="old-price">370.000 đ</span></div>
                             <div class="cta-box">
                                 <button class="btn btn-outline">Thêm giỏ</button>
-                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'A provocative and grand narrative exploring the history of human species from evolution to modern global empires.', 'Nguyên bản tiếng Anh', 'Harper Perennial', 'HMB Import', '2023', '13 x 20 cm', 'Bìa mềm', '512 trang')">Mua ngay</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Sapiens English Edition', 'Yuval Harari', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'A grand overview of humanity evolution history.', 'Nguyên bản tiếng Anh', 'Harper', 'HMB Import', '2023', '13 x 20 cm', 'Bìa mềm', '512 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            <section class="search-section container">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" placeholder="Tìm kiếm sách...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+            </section>
+        <!-- PHẦN B: HỆ THỐNG KỆ SÁCH CỐ ĐỊNH HIỂN THỊ LIÊN TỤC -->
+        <section class="bookshelf-section">
+            <div class="container">
+                
+                <!-- --- KỆ 1: VĂN HỌC TRONG NƯỚC (8 CUỐN CỐ ĐỊNH) --- -->
+                <div class="shelf-title">Văn Học Chọn Lọc (Tiểu Thuyết, Truyện Ngắn, Thơ, Tản Văn)</div>
+                <div class="book-grid-fixed" style="margin-bottom: 40px;">
+                    <!-- Cuốn 1 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Rừng Na Uy', 'Haruki Murakami', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Hoài niệm sâu sắc về nỗi cô đơn lạc lối tuổi trẻ.', 'Trịnh Lữ', 'NXB Hội Nhà Văn', 'Nhã Nam', '2026', '15 x 24 cm', 'Bìa mềm', '450 trang')">
+                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Rừng Na Uy (Tiểu thuyết) - Ấn Bản Đặc Biệt</h3>
+                                <p class="book-author">Haruki Murakami</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">148.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Rừng Na Uy', 'Haruki Murakami', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Hoài niệm sâu sắc về nỗi cô đơn lạc lối tuổi trẻ.', 'Trịnh Lữ', 'NXB Hội Nhà Văn', 'Nhã Nam', '2026', '15 x 24 cm', 'Bìa mềm', '450 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 2 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Tìm Lại Bình Yên', 'Nhiều tác giả', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Tản văn xoa dịu áp lực tâm lý người trẻ cuộc sống hiện đại.', 'Phan Thị C', 'NXB Văn Học', 'Skybooks', '2025', '12 x 19 cm', 'Bìa mềm', '240 trang')">
+                                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Tìm Lại Bình Yên Trong Từng Giờ Phút - Tản Văn Chữa Lành</h3>
+                                <p class="book-author">Nhiều tác giả</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">85.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Tìm Lại Bình Yên', 'Nhiều tác giả', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Tản văn xoa dịu áp lực tâm lý người trẻ cuộc sống hiện đại.', 'Phan Thị C', 'NXB Văn Học', 'Skybooks', '2025', '12 x 19 cm', 'Bìa mềm', '240 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 3 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Số Đỏ', 'Vũ Trọng Phụng', 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80', 'Kiệt tác trào phúng đỉnh cao xã hội Việt Nam thời kỳ Âu hóa.', 'Không có', 'NXB Văn Học', 'Nhã Nam', '2024', '14 x 20.5 cm', 'Bìa mềm', '255 trang')">
+                                <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80" alt="Số Đỏ">
+                            </div>
+                            <div class="book-info">
+                                <h3>Số Đỏ - Vũ Trọng Phụng (Ấn Bản Phục Dựng)</h3>
+                                <p class="book-author">Vũ Trọng Phụng</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">72.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Số Đỏ', 'Vũ Trọng Phụng', 'https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=400&q=80', 'Kiệt tác trào phúng đỉnh cao xã hội Việt Nam thời kỳ Âu hóa.', 'Không có', 'NXB Văn Học', 'Nhã Nam', '2024', '14 x 20.5 cm', 'Bìa mềm', '255 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 4 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Chuyện Con Mèo Dạy Hải Âu Bay', 'Luis Sepúlveda', 'https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?auto=format&fit=crop&w=400&q=80', 'Bài học cảm động nhân văn về tình yêu thương giữ lời hứa.', 'Hải Ngọc', 'NXB Kim Đồng', 'Nhã Nam', '2025', '13 x 18 cm', 'Bìa mềm', '140 trang')">
+                                <img src="https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?auto=format&fit=crop&w=400&q=80" alt="Mèo">
+                            </div>
+                            <div class="book-info">
+                                <h3>Chuyện Con Mèo Dạy Hải Âu Bay - Truyện Ngắn</h3>
+                                <p class="book-author">Luis Sepúlveda</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">49.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Chuyện Con Mèo Dạy Hải Âu Bay', 'Luis Sepúlveda', 'https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?auto=format&fit=crop&w=400&q=80', 'Bài học cảm động nhân văn về tình yêu thương giữ lời hứa.', 'Hải Ngọc', 'NXB Kim Đồng', 'Nhã Nam', '2025', '13 x 18 cm', 'Bìa mềm', '140 trang')">Mua ngay</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Hàng 2 của kệ Văn học Chọn Lọc -->
+                <div class="book-grid-fixed" style="margin-bottom: 40px;">
+                    <!-- Cuốn 5 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Mắt Biếc', 'Nguyễn Nhật Ánh', 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80', 'Câu chuyện tình si đầy hoài niệm thời học trò trứ danh.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2024', '13 x 20 cm', 'Bìa mềm', '296 trang')">
+                                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80" alt="Mắt Biếc">
+                            </div>
+                            <div class="book-info">
+                                <h3>Mắt Biếc - Ấn Bản Phổ Thông</h3>
+                                <p class="book-author">Nguyễn Nhật Ánh</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">92.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Mắt Biếc', 'Nguyễn Nhật Ánh', 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80', 'Câu chuyện tình si đầy hoài niệm thời học trò trứ danh.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2024', '13 x 20 cm', 'Bìa mềm', '296 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 6 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Gió Lạnh Đầu Mùa', 'Thạch Lam', 'https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=400&q=80', 'Tuyển tập những truyện ngắn nhẹ nhàng đầy tình thương cảm người lao động nghèo.', 'Không có', 'NXB Văn Học', 'Nhã Nam', '2024', '13 x 19 cm', 'Bìa mềm', '180 trang')">
+                                <img src="https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=400&q=80" alt="Thạch Lam">
+                            </div>
+                            <div class="book-info">
+                                <h3>Gió Lạnh Đầu Mùa - Tập Truyện Ngắn Hay Nhất</h3>
+                                <p class="book-author">Thạch Lam</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">55.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Gió Lạnh Đầu Mùa', 'Thạch Lam', 'https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=400&q=80', 'Tuyển tập những truyện ngắn nhẹ nhàng đầy tình thương cảm người lao động nghèo.', 'Không có', 'NXB Văn Học', 'Nhã Nam', '2024', '13 x 19 cm', 'Bìa mềm', '180 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 7 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Thơ Xuân Quỳnh', 'Xuân Quỳnh', 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80', 'Tuyển tập những bài thơ tình yêu bất hủ đi cùng năm tháng.', 'Không có', 'NXB Kim Đồng', 'Kim Đồng', '2025', '12 x 19 cm', 'Bìa mềm', '160 trang')">
+                                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80" alt="Thơ">
+                            </div>
+                            <div class="book-info">
+                                <h3>Tự Hát - Tuyển Tập Thơ Tình Đặc Sắc Xuân Quỳnh</h3>
+                                <p class="book-author">Xuân Quỳnh</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">60.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Thơ Xuân Quỳnh', 'Xuân Quỳnh', 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80', 'Tuyển tập những bài thơ tình yêu bất hủ đi cùng năm tháng.', 'Không có', 'NXB Kim Đồng', 'Kim Đồng', '2025', '12 x 19 cm', 'Bìa mềm', '160 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 8 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Cánh Đồng Bất Tận', 'Nguyễn Ngọc Tư', 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=400&q=80', 'Tập truyện ngắn gai góc đậm chất mộc mạc sông nước miền Tây Nam Bộ.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2024', '13 x 20 cm', 'Bìa mềm', '210 trang')">
+                                <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=400&q=80" alt="Ngọc Tư">
+                            </div>
+                            <div class="book-info">
+                                <h3>Cánh Đồng Bất Tận - Tập Truyện Ngắn Đoạt Giải</h3>
+                                <p class="book-author">Nguyễn Ngọc Tư</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">78.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Cánh Đồng Bất Tận', 'Nguyễn Ngọc Tư', 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=400&q=80', 'Tập truyện ngắn gai góc đậm chất mộc mạc sông nước miền Tây Nam Bộ.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2024', '13 x 20 cm', 'Bìa mềm', '210 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- --- KỆ 2: KINH TẾ & KHỞI NGHIỆP (8 CUỐN CỐ ĐỊNH) --- -->
+                <div class="shelf-title">Kinh Tế & Khởi Nghiệp (Quản Trị, Khởi Nghiệp, Tài Chính Cá Nhân, Marketing)</div>
+                <div class="book-grid-fixed" style="margin-bottom: 40px;">
+                    <!-- Cuốn 9 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Hiệu Ứng Chim Mồi', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Đòn tâm lý học định giá đè bẹp đối thủ thúc đẩy hành vi tiêu dùng.', 'Phạm Thanh Hương', 'NXB Công Thương', 'Nhất Nam', '2024', '14 x 20 cm', 'Bìa mềm', '215 trang')">
+                                <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Hiệu Ứng Chim Mồi - Nghệ Thuật Định Giá Tối Ưu Doanh Thu</h3>
+                                <p class="book-author">Nhiều Tác Giả</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">79.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Hiệu Ứng Chim Mồi', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Đòn tâm lý học định giá đè bẹp đối thủ thúc đẩy hành vi tiêu dùng.', 'Phạm Thanh Hương', 'NXB Công Thương', 'Nhất Nam', '2024', '14 x 20 cm', 'Bìa mềm', '215 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 10 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Nhà Quản Trị Thành Công', 'Peter F. Drucker', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80', 'Bản đồ quản trị cốt lõi nâng cao hiệu suất làm việc.', 'Trần Thị Thu', 'NXB Trẻ', 'Alpha Books', '2025', '14 x 20.5 cm', 'Bìa mềm', '290 trang')">
+                                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80" alt="Drucker">
+                            </div>
+                            <div class="book-info">
+                                <h3>Nhà Quản Trị Hiệu Quả - Cẩm Nang Điều Hành Drucker</h3>
+                                <p class="book-author">Peter F. Drucker</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">115.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Nhà Quản Trị Thành Công', 'Peter F. Drucker', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80', 'Bản đồ quản trị cốt lõi nâng cao hiệu suất làm việc.', 'Trần Thị Thu', 'NXB Trẻ', 'Alpha Books', '2025', '14 x 20.5 cm', 'Bìa mềm', '290 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 11 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Quốc Gia Khởi Nghiệp', 'Dan Senor', 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80', 'Sự phát triển thần kỳ của nền kinh tế công nghệ Israel.', 'Trần Đắc Khoa', 'NXB Thế Giới', 'Alpha Books', '2024', '14 x 20.5 cm', 'Bìa mềm', '390 trang')">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Startup">
+                            </div>
+                            <div class="book-info">
+                                <h3>Quốc Gia Khởi Nghiệp - Sức Mạnh Sáng Tạo Đột Phá</h3>
+                                <p class="book-author">Dan Senor & Saul Singer</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">128.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Quốc Gia Khởi Nghiệp', 'Dan Senor', 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80', 'Sự phát triển thần kỳ của nền kinh tế công nghệ Israel.', 'Trần Đắc Khoa', 'NXB Thế Giới', 'Alpha Books', '2024', '14 x 20.5 cm', 'Bìa mềm', '390 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 12 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('CANSLIM', 'William O\'Neil', 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=400&q=80', 'Hệ thống đầu tư tài chính lựa chọn cổ phiếu tăng trưởng.', 'Nguyễn Hoài An', 'NXB Tài Chính', 'HMB Capital', '2025', '16 x 24 cm', 'Bìa mềm', '410 trang')">
+                                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=400&q=80" alt="Stock">
+                            </div>
+                            <div class="book-info">
+                                <h3>Làm Giàu Từ Chứng Khoán - Hệ Thống CANSLIM</h3>
+                                <p class="book-author">William O'Neil</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">195.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('CANSLIM', 'William O\'Neil', 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=400&q=80', 'Hệ thống đầu tư tài chính lựa chọn cổ phiếu tăng trưởng.', 'Nguyễn Hoài An', 'NXB Tài Chính', 'HMB Capital', '2025', '16 x 24 cm', 'Bìa mềm', '410 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hàng 2 của kệ Kinh tế -->
+                <div class="book-grid-fixed" style="margin-bottom: 40px;">
+                    <!-- Cuốn 13 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Blink - Trong Chớp Mắt', 'Malcolm Gladwell', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Giải mã sức mạnh của việc đưa ra quyết định nhanh chóng trong tích tắc.', 'Diệu Hằng', 'NXB Thế Giới', 'Alpha Books', '2024', '14 x 20.5 cm', 'Bìa mềm', '312 trang')">
+                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Blink">
+                            </div>
+                            <div class="book-info">
+                                <h3>Trong Chớp Mắt - Sức Mạnh Của Nhận Thức Tức Thì</h3>
+                                <p class="book-author">Malcolm Gladwell</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">112.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Blink - Trong Chớp Mắt', 'Malcolm Gladwell', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Giải mã sức mạnh của việc đưa ra quyết định nhanh chóng trong tích tắc.', 'Diệu Hằng', 'NXB Thế Giới', 'Alpha Books', '2024', '14 x 20.5 cm', 'Bìa mềm', '312 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 14 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Dốc Hết Trái Tim', 'Howard Schultz', 'https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=400&q=80', 'Hành trình xây dựng đế chế cà phê Starbucks vang danh toàn thế giới.', 'Nhiều dịch giả', 'NXB Tổng Hợp', 'Alpha Books', '2024', '14 x 20.5 cm', 'Bìa mềm', '420 trang')">
+                                <img src="https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=400&q=80" alt="Starbucks">
+                            </div>
+                            <div class="book-info">
+                                <h3>Dốc Hết Trái Tim - Cách Starbucks Xây Dựng Đế Chế</h3>
+                                <p class="book-author">Howard Schultz</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">135.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Dốc Hết Trái Tim', 'Howard Schultz', 'https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=400&q=80', 'Hành trình xây dựng đế chế cà phê Starbucks vang danh toàn thế giới.', 'Nhiều dịch giả', 'NXB Tổng Hợp', 'Alpha Books', '2024', '14 x 20.5 cm', 'Bìa mềm', '420 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 15 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Content Bán Hàng Đỉnh Cao', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80', 'Phương pháp viết thôi miên khách hàng chốt đơn hàng loạt.', 'Hoàng Nhung', 'NXB Thanh Niên', 'HMB Edu', '2025', '13 x 20.5 cm', 'Bìa mềm', '240 trang')">
+                                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80" alt="Content">
+                            </div>
+                            <div class="book-info">
+                                <h3>Content Đắt Giá - Thôi Miên Khách Hàng Bằng Ngôn Từ</h3>
+                                <p class="book-author">Nhiều Tác Giả</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">86.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Content Bán Hàng Đỉnh Cao', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80', 'Phương pháp viết thôi miên khách hàng chốt đơn hàng loạt.', 'Hoàng Nhung', 'NXB Thanh Niên', 'HMB Edu', '2025', '13 x 20.5 cm', 'Bìa mềm', '240 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 16 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Nhà Đầu Tư Thông Minh', 'Benjamin Graham', 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=400&q=80', 'Triết lý đầu tư giá trị kinh điển cốt lõi.', 'Thái An', 'NXB Tài Chính', 'Alpha Books', '2024', '16 x 24 cm', 'Bìa mềm', '650 trang')">
+                                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=400&q=80" alt="Graham">
+                            </div>
+                            <div class="book-info">
+                                <h3>Nhà Đầu Tư Thông Minh - Kinh Điển Đầu Tư Giá Trị Bền Vững</h3>
+                                <p class="book-author">Benjamin Graham</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">210.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Nhà Đầu Tư Thông Minh', 'Benjamin Graham', 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=400&q=80', 'Triết lý đầu tư giá trị kinh điển cốt lõi.', 'Thái An', 'NXB Tài Chính', 'Alpha Books', '2024', '16 x 24 cm', 'Bìa mềm', '650 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- --- KỆ 3: GIÁO TRÌNH - THIẾU NHI - NGOẠI NGỮ (8 CUỐN CỐ ĐỊNH) --- -->
+                <div class="shelf-title">Giáo Trình, Sách Ngữ Học & Thiếu Nhi (Tiếng Anh, Nhật, Hàn, Chuyên Ngành, Nuôi Dạy Con)</div>
+                <div class="book-grid-fixed" style="margin-bottom: 40px;">
+                    <!-- Cuốn 17 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Vô Cùng Tàn Nhẫn', 'Sara Imas', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80', 'Nghệ thuật nuôi con tự lập mãnh liệt từ tình mẹ Do Thái.', 'Hàn Phong', 'NXB Dân Trí', 'Alpha Books', '2024', '13.5 x 20.5 cm', 'Bìa mềm', '410 trang')">
+                                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Vô Cùng Tàn Nhẫn Vô Cùng Yêu Thương - Sách Nuôi Dạy Con</h3>
+                                <p class="book-author">Sara Imas</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">110.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Vô Cùng Tàn Nhẫn', 'Sara Imas', 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80', 'Nghệ thuật nuôi con tự lập mãnh liệt từ tình mẹ Do Thái.', 'Hàn Phong', 'NXB Dân Trí', 'Alpha Books', '2024', '13.5 x 20.5 cm', 'Bìa mềm', '410 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 18 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Y Học Dinh Dưỡng', 'Ray D. Strand', 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80', 'Bảo vệ sức khỏe tế bào dinh dưỡng chủ động toàn diện.', 'Nguyễn Việt Long', 'NXB Hồng Đức', 'HMB Edu', '2025', '14 x 20.5 cm', 'Bìa mềm', '340 trang')">
+                                <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Y Học Dinh Dưỡng - Bí Quyết Bảo Vệ Sức Khỏe Tối Ưu</h3>
+                                <p class="book-author">Ray D. Strand</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">132.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Y Học Dinh Dưỡng', 'Ray D. Strand', 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80', 'Bảo vệ sức khỏe tế bào dinh dưỡng chủ động toàn diện.', 'Nguyễn Việt Long', 'NXB Hồng Đức', 'HMB Edu', '2025', '14 x 20.5 cm', 'Bìa mềm', '340 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 19 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Nuôi Con Không Phải Cuộc Chiến', 'Mẹ Ong Bông', 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=400&q=80', 'Hướng dẫn nuôi bé khoa học theo chu kỳ EASY hữu ích cho cha mẹ.', 'Không có', 'NXB Lao Động', 'Thái Hà', '2024', '15 x 23 cm', 'Bìa mềm', '280 trang')">
+                                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=400&q=80" alt="Baby">
+                            </div>
+                            <div class="book-info">
+                                <h3>Nuôi Con Không Phải Là Cuộc Chiến - Cẩm Nang Easy</h3>
+                                <p class="book-author">Nhiều Tác Giả</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">95.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Nuôi Con Không Phải Cuộc Chiến', 'Mẹ Ong Bông', 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=400&q=80', 'Hướng dẫn nuôi bé khoa học theo chu kỳ EASY hữu ích cho cha mẹ.', 'Không có', 'NXB Lao Động', 'Thái Hà', '2024', '15 x 23 cm', 'Bìa mềm', '280 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 20 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Sách Tô Màu Bé Sáng Tạo', 'HMB Kid', 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&q=80', 'Bản vẽ sinh động kích thích mỹ thuật sớm cho bé yêu.', 'Không có', 'NXB Mỹ Thuật', 'HMB Kid', '2026', '20 x 20 cm', 'Bìa mềm', '48 trang')">
+                                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&q=80" alt="Color">
+                            </div>
+                            <div class="book-info">
+                                <h3>Sách Tô Màu Phát Triển Trí Não Sáng Tạo Cho Bé</h3>
+                                <p class="book-author">HMB Kid Studio</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">35.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Sách Tô Màu Bé Sáng Tạo', 'HMB Kid', 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&q=80', 'Bản vẽ sinh động kích thích mỹ thuật sớm cho bé yêu.', 'Không có', 'NXB Mỹ Thuật', 'HMB Kid', '2026', '20 x 20 cm', 'Bìa mềm', '48 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hàng 2 của kệ Giáo trình & Ngoại ngữ -->
+                <div class="book-grid-fixed">
+                    <!-- Cuốn 21 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('English Grammar in Use', 'Raymond Murphy', 'https://images.unsplash.com/photo-1491841573178-86d8c35131a7?auto=format&fit=crop&w=400&q=80', 'Giáo trình ngữ pháp tiếng Anh chuẩn mực nổi tiếng thế giới.', 'Không có', 'Cambridge', 'HMB Import', '2024', '20 x 26 cm', 'Bìa mềm', '380 trang')">
+                                <img src="https://images.unsplash.com/photo-1491841573178-86d8c35131a7?auto=format&fit=crop&w=400&q=80" alt="English">
+                            </div>
+                            <div class="book-info">
+                                <h3>English Grammar in Use - Bản Ngữ Pháp Toàn Diện (Tiếng Anh)</h3>
+                                <p class="book-author">Raymond Murphy</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">180.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('English Grammar in Use', 'Raymond Murphy', 'https://images.unsplash.com/photo-1491841573178-86d8c35131a7?auto=format&fit=crop&w=400&q=80', 'Giáo trình ngữ pháp tiếng Anh chuẩn mực nổi tiếng thế giới.', 'Không có', 'Cambridge', 'HMB Import', '2024', '20 x 26 cm', 'Bìa mềm', '382 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 22 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Giáo Trình Tiếng Nhật Minna No Nihongo I', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=400&q=80', 'Giáo trình sơ cấp vỡ lòng tiếng Nhật chuẩn mực nhất hiện nay.', 'Đội ngũ HMB', 'NXB Trẻ', '3A Network', '2024', '18 x 25 cm', 'Bìa mềm', '250 trang')">
+                                <img src="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=400&q=80" alt="Japanese">
+                            </div>
+                            <div class="book-info">
+                                <h3>Minna No Nihongo N5-N4 - Sách Học Ngữ Tiếng Nhật</h3>
+                                <p class="book-author">Nhiều Tác Giả</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">95.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Giáo Trình Tiếng Nhật Minna No Nihongo I', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=400&q=80', 'Giáo trình sơ cấp vỡ lòng tiếng Nhật chuẩn mực nhất hiện nay.', 'Đội ngũ HMB', 'NXB Trẻ', '3A Network', '2024', '18 x 25 cm', 'Bìa mềm', '250 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 23 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Tự Học Tiếng Hàn Cho Người Mới Bắt Đầu', 'Lee Jung Sook', 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=400&q=80', 'Phương pháp làm quen bảng chữ cái Hangul và giao tiếp cấp tốc căn bản.', 'Hồng Nhung', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '14.5 x 20.5 cm', 'Bìa mềm', '220 trang')">
+                                <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=400&q=80" alt="Korean">
+                            </div>
+                            <div class="book-info">
+                                <h3>Tự Học Tiếng Hàn Giao Tiếp Cấp Tốc Căn Bản (Tiếng Hàn)</h3>
+                                <p class="book-author">Lee Jung Sook</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">80.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Tự Học Tiếng Hàn Cho Người Mới Bắt Đầu', 'Lee Jung Sook', 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=400&q=80', 'Phương pháp làm quen bảng chữ cái Hangul và giao tiếp cấp tốc căn bản.', 'Hồng Nhung', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '14.5 x 20.5 cm', 'Bìa mềm', '220 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 24 -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Lập Trình Unity 2D Game Chuyên Ngành', 'HMB Academic', 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80', 'Sách chuyên ngành lý thuyết lập trình phát triển game 2D và quản trị GameObject trong Unity.', 'Đội ngũ chuyên gia', 'NXB Bách Khoa', 'HMB Tech', '2026', '16 x 24 cm', 'Bìa cứng', '350 trang')">
+                                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80" alt="Unity Tech">
+                            </div>
+                            <div class="book-info">
+                                <h3>Cơ Sở Thiết Kế Và Lập Trình Game 2D Unity (Sách Chuyên Ngành)</h3>
+                                <p class="book-author">HMB Academic Group</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">220.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" onclick="navigateToDetail('Lập Trình Unity 2D Game Chuyên Ngành', 'HMB Academic', 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80', 'Sách chuyên ngành lý thuyết lập trình phát triển game 2D và quản trị GameObject trong Unity.', 'Đội ngũ chuyên gia', 'NXB Bách Khoa', 'HMB Tech', '2026', '16 x 24 cm', 'Bìa cứng', '350 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
+    <!-- =======================================================
+         --- MÀN HÌNH 2: GIAO DIỆN XEM CHI TIẾT SÁCH PHẲNG (SPA) --- 
+         ====================================================== -->
     <main id="detail-page-view">
         <div class="container">
             <button class="back-to-home-btn" onclick="navigateToHome()"><i class="fa-solid fa-arrow-left"></i> Quay lại trang chủ</button>
 
+            <!-- Tinh chỉnh loại bỏ khung viền ngoài và đổ bóng, nền trong suốt đắt giá -->
             <div class="detail-wrapper">
+                <!-- Cột hình ảnh khổ lớn nghệ thuật -->
                 <div class="modal-gallery">
                     <div class="main-img"><img id="detailImg" src="" alt="Bìa sách"></div>
                     <div class="thumb-imgs">
@@ -824,6 +1313,7 @@
                     </div>
                 </div>
 
+                <!-- Cột thông tin chữ dãn cách thoáng đãng -->
                 <div class="info-detail">
                     <h1 id="detailTitle">Tên Sách</h1>
                     <div class="modal-book-author">Tác giả: <span id="detailAuthor" style="color:var(--primary-color);">...</span></div>
@@ -832,6 +1322,7 @@
                         <strong>Tóm tắt nội dung:</strong> <span id="detailBlurb">Nội dung tóm tắt...</span>
                     </div>
                     
+                    <!-- Lưới thông số kỹ thuật đã sửa lỗi co dãn chữ -->
                     <div class="meta-info-grid">
                         <div class="meta-item"><span class="meta-label">Dịch giả</span><span class="meta-value" id="detailTranslator">...</span></div>
                         <div class="meta-item"><span class="meta-label">Nhà xuất bản</span><span class="meta-value" id="detailPublisher">...</span></div>
@@ -851,6 +1342,7 @@
         </div>
     </main>
 
+    <!-- --- FOOTER THƯƠNG HIỆU HMB AGENCY --- -->
     <footer>
         <div class="container footer-grid-pro">
             <div class="footer-col brand">
@@ -875,6 +1367,7 @@
         </div>
     </footer>
 
+    <!-- --- HỆ THỐNG SCRIPT KHỞI CHẠY --- -->
     <script>
         const homepageView = document.getElementById('homepage-view');
         const detailPageView = document.getElementById('detail-page-view');
@@ -885,29 +1378,21 @@
         const totalTabs = 3;    
         let tabRotateInterval;  
 
-        // --- 1. LOGIC MENUBAR 3 GẠCH TRÊN MOBILE ---
         function toggleMobileMenu() {
             mobileNav.classList.toggle('open');
-            
-            // Thay đổi icon từ 3 gạch (bars) thành nút đóng (xmark) để tăng trải nghiệm trực quan
             const icon = menuToggleBtn.querySelector('i');
             if (mobileNav.classList.contains('open')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-xmark');
+                icon.className = 'fa-solid fa-xmark';
             } else {
-                icon.classList.remove('fa-xmark');
-                icon.classList.add('fa-bars');
+                icon.className = 'fa-solid fa-bars';
             }
         }
 
         function navigateToHomeAndCloseMenu() {
             navigateToHome();
-            if (mobileNav.classList.contains('open')) {
-                toggleMobileMenu(); // Đóng thanh menu sau khi click chọn link điều hướng
-            }
+            if (mobileNav.classList.contains('open')) toggleMobileMenu();
         }
 
-        // --- 2. LOGIC XOAY TUA TAB TỰ ĐỘNG ---
         function switchTab(tabIndex) {
             const buttons = document.querySelectorAll('.tab-btn');
             const grids = document.querySelectorAll('.book-grid');
@@ -934,7 +1419,6 @@
             startTabAutoRotation();
         }
 
-        // --- 3. ĐIỀU HƯỚNG MÀN HÌNH CHI TIẾT SÁCH (SPA) ---
         function navigateToDetail(title, author, imgSrc, blurb, translator, publisher, distributor, year, size, cover, pages) {
             document.getElementById('detailTitle').innerText = title;
             document.getElementById('detailAuthor').innerText = author;
@@ -949,17 +1433,18 @@
             document.getElementById('detailCover').innerText = cover;
             document.getElementById('detailPages').innerText = pages;
 
+            const fullWidthMeta = document.getElementById('fullWidthMeta');
             if(window.innerWidth <= 768) {
-                document.getElementById('fullWidthMeta').style.gridColumn = "auto";
+                fullWidthMeta.style.gridColumn = "auto";
             } else {
-                document.getElementById('fullWidthMeta').style.gridColumn = "span 2";
+                fullWidthMeta.style.gridColumn = "span 2";
             }
 
             homepageView.style.display = 'none';
             detailPageView.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            clearInterval(tabRotateInterval); // Tạm ngắt đếm giây khi xem chi tiết sách
+            clearInterval(tabRotateInterval);
         }
 
         function navigateToHome() {
@@ -968,7 +1453,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
             clearInterval(tabRotateInterval);
-            startTabAutoRotation(); // Chạy lại luồng xoay tua khi về trang chủ
+            startTabAutoRotation();
         }
 
         window.onload = function() {
