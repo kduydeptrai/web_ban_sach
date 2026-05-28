@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMB Agency - Nhà Sách Trực Tuyến & Giải Pháp Số</title>
+    <!-- Nhúng Font Awesome để hiển thị các icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- CẤU HÌNH HỆ THỐNG & MÀU CHỦ ĐẠO (NAVY & ĐỎ ĐÔ) --- */
+        :root {
+            --primary-color: #0B2545; /* Xanh dương đậm tri thức, thương hiệu HMB */
+            --accent-color: #8B0000;  /* Đỏ đô cổ điển tạo điểm nhấn */
+            --text-color: #2D3748;
+            --bg-light: #F7FAFC;
+            --white: #FFFFFF;
+            --gray: #718096;
+            --border: #E2E8F0;
+            --text-muted: #A0AEC0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: #FFD700;
+            margin-left: 5px;
+            font-weight: 400;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            position: relative;
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        /* Dropdown Menu Mega */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--white);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding: 20px;
+            min-width: 550px;
+            border-radius: 4px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .dropdown-content::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent var(--white) transparent;
+        }
+
+        nav ul li:hover .dropdown-content {
+            display: grid;
+        }
+
+        .dropdown-col h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .dropdown-col a {
+            color: var(--text-color) !important;
+            display: block;
+            padding: 4px 0;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .dropdown-col a:hover {
+            color: var(--accent-color) !important;
+            padding-left: 4px;
+        }
+
+        /* --- BANNER --- */
+        .hero-banner {
+            background: linear-gradient(135deg, #13315C, #0B2545);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-banner h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .hero-banner p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .promo-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- MÀN HÌNH 1: TRANG CHỦ --- */
+        #homepage-view {
+            display: block;
+        }
+
+        .tabs-section {
+            padding: 50px 0 30px;
+        }
+
+        .tab-headers {
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--gray);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .countdown {
+            display: inline-flex;
+            align-items: center;
+            background: #FFF0F0;
+            color: var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        /* Điều khiển ẩn hiện danh sách theo Tab */
+        .book-grid {
+            display: none; 
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .book-grid.active {
+            display: grid; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .book-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 4px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .book-img-box {
+            position: relative;
+            background-color: var(--bg-light);
+            padding: 15px;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .book-img-box img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .book-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            height: 44px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: var(--text-color);
+        }
+
+        .book-author {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .price-box {
+            margin-bottom: 15px;
+        }
+
+        .current-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .old-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 12px;
+            margin-left: 6px;
+        }
+
+        .cta-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 10px 5px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover { opacity: 0.9; }
+        .btn-outline { background-color: transparent; color: var(--primary-color); border: 1px solid var(--primary-color); }
+        .btn-fill { background-color: var(--primary-color); color: var(--white); }
+
+        /* --- MÀN HÌNH 2: CHI TIẾT SÁCH --- */
+        #detail-page-view {
+            display: none; 
+            padding: 40px 0 60px 0;
+            background-color: #FAFAFA;
+        }
+
+        .back-to-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14.5px;
+            margin-bottom: 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .back-to-home-btn:hover { transform: translateX(-4px); color: var(--accent-color); }
+
+        .detail-wrapper {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            gap: 50px;
+            background-color: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(11, 37, 69, 0.06);
+        }
+
+        .modal-gallery { display: flex; flex-direction: column; gap: 20px; }
+        .main-img {
+            background-color: #FAFAFA; padding: 40px; text-align: center; border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: center; min-height: 460px;
+        }
+        .main-img img {
+            max-height: 420px; max-width: 100%; object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.18)) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+        }
+
+        .thumb-imgs { display: flex; gap: 15px; justify-content: center; }
+        .thumb-imgs div { width: 75px; height: 75px; background: var(--white); border: 1px solid var(--border); padding: 5px; border-radius: 10px; }
+        .thumb-imgs img { width: 100%; height: 100%; object-fit: contain; }
+
+        .info-detail h1 { font-size: 26px; font-weight: 700; color: var(--primary-color); line-height: 1.3; margin-bottom: 10px; }
+        .modal-book-author { font-size: 15px; color: var(--gray); font-weight: 500; margin-bottom: 25px; }
+
+        .blurb-box {
+            background-color: var(--bg-light); padding: 20px; border-left: 4px solid var(--primary-color);
+            margin-bottom: 30px; font-size: 14.5px; color: #4A5568; border-radius: 0 10px 10px 0; line-height: 1.6;
+        }
+
+        .meta-info-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 30px; padding: 25px 0;
+            border-top: 1px dashed var(--border); border-bottom: 1px dashed var(--border); margin-bottom: 35px;
+        }
+        .meta-item { display: flex; justify-content: space-between; font-size: 14px; }
+        .meta-label { color: var(--gray); }
+        .meta-value { color: var(--text-color); font-weight: 600; text-align: right; padding-left: 10px; }
+
+        .detail-action-box { display: grid; grid-template-columns: 1fr 1.2fr; gap: 15px; }
+        .detail-action-box .btn { padding: 16px; font-size: 15px; border-radius: 10px; }
+        .detail-action-box .btn-fill { background-color: var(--accent-color); }
+
+        /* --- FOOTER --- */
+        footer { background-color: var(--primary-color); color: #e2e8f0; padding: 60px 0 20px 0; border-top: 4px solid var(--accent-color); }
+        .footer-grid-pro { display: flex; justify-content: space-between; gap: 40px; }
+        .footer-col { flex: 1; }
+        .footer-col.brand { flex: 1.5; }
+        footer h3 { color: var(--white); font-size: 1.2rem; font-weight: 600; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        footer h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: var(--accent-color); }
+        .brand-desc { line-height: 1.6; color: var(--text-muted); margin-bottom: 20px; }
+        .contact-info-list, .footer-links-list { list-style: none; }
+        .contact-info-list li { margin-bottom: 12px; display: flex; align-items: center; color: #e2e8f0; }
+        .contact-info-list li i { color: var(--accent-color); margin-right: 12px; }
+        .footer-links-list li a { color: var(--text-muted); text-decoration: none; }
+        .social-pro-icons { display: flex; gap: 10px; margin-bottom: 25px; }
+        .social-pro-icons a { display: inline-block; width: 38px; height: 38px; background-color: rgba(255, 255, 255, 0.08); color: var(--white); text-align: center; line-height: 38px; border-radius: 50%; text-decoration: none; }
+        .newsletter-box { background-color: rgba(255, 255, 255, 0.04); padding: 15px; border-radius: 6px; border-left: 3px solid var(--accent-color); }
+        .footer-bottom-pro { margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; }
+        .footer-bottom-pro a { color: var(--text-muted); text-decoration: none; margin-left: 20px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1200px) {
+            .detail-wrapper { gap: 30px; }
+            .main-img { min-height: 380px; }
+        }
+        @media (max-width: 992px) {
+            .book-grid { grid-template-columns: repeat(3, 1fr); }
+            .detail-wrapper { grid-template-columns: 45% 55%; gap: 25px; padding: 30px; }
+            .main-img { min-height: 320px; padding: 20px; }
+            .main-img img { max-height: 280px; }
+        }
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero-banner h1 { font-size: 26px; }
+            .book-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .book-img-box { height: 180px; }
+            .footer-grid-pro { flex-direction: column; gap: 35px; }
+            .footer-bottom-pro { flex-direction: column; text-align: center; gap: 12px; }
+            .detail-wrapper { grid-template-columns: 1fr; gap: 20px; padding: 25px 20px; }
+            .main-img { min-height: 220px; }
+            .main-img img { max-height: 200px; }
+            .meta-info-grid { grid-template-columns: 1fr; gap: 10px; }
+            .detail-action-box { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- HEADER --- -->
+    <header>
+        <div class="container header-container">
+            <div class="logo" onclick="navigateToHome()">HMB<span>Agency</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="navigateToHome()">Trang Chủ</a></li>
+                    <li>
+                        <a href="#">Sách Trong Nước ▼</a>
+                        <div class="dropdown-content">
+                            <div class="dropdown-col">
+                                <h4>Văn học / Kinh tế</h4>
+                                <a href="#">Tiểu thuyết</a><a href="#">Truyện ngắn</a>
+                                <a href="#">Quản trị</a><a href="#">Khởi nghiệp</a>
+                            </div>
+                            <div class="dropdown-col">
+                                <h4>Kỹ năng / Thiếu nhi</h4>
+                                <a href="#">Phát triển bản thân</a><a href="#">Tâm lý học</a>
+                                <a href="#">Truyện tranh</a><a href="#">Nuôi dạy con</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">Sách Nước Ngoài ▼</a></li>
+                    <li><a href="#">Văn phòng phẩm & Quà tặng</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- --- BANNER --- -->
+    <section class="hero-banner">
+        <div class="container">
+            <h1>HỘI SÁCH CHÀO HÈ 2026 - HMB AGENCY</h1>
+            <p>Khám phá thế giới tri thức vô tận cùng hệ thống phân phối sách công nghệ thế hệ mới.</p>
+            <div class="promo-badge">Ưu Đãi Lên Đến 50%</div>
+        </div>
+    </section>
+
+    <!-- =======================================================
+         --- MÀN HÌNH 1: TRANG CHỦ (HỆ THỐNG 12 ĐẦU SÁCH MỚI) --- 
+         ======================================================= -->
+    <main id="homepage-view">
+        <section class="tabs-section">
+            <div class="container">
+                
+                <div class="tab-headers">
+                    <button class="tab-btn active" onclick="handleTabClick(0)">Sách Mới Phát Hành</button>
+                    <button class="tab-btn" onclick="handleTabClick(1)">Sách Bán Chạy</button>
+                    <button class="tab-btn" onclick="handleTabClick(2)">Ưu Đãi Trong Ngày <span class="countdown">02:45:12</span></button>
+                </div>
+
+                <!-- --- TAB 0: SÁCH MỚI PHÁT HÀNH (4 ĐẦU SÁCH) --- -->
+                <div class="book-grid active" id="grid-tab-0">
+                    <!-- Cuốn 1 (Kinh tế) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Hành Trình Khởi Nghiệp Tinh Gọn Trong Kỷ Nguyên Số', 'Eric Ries', 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80', 'Cuốn sách mở ra một tư duy hoàn toàn mới về cách vận hành doanh nghiệp, tối ưu hóa chi phí và thử nghiệm sản phẩm tinh gọn.', 'Nguyễn Văn A', 'NXB Thế Giới', 'Nhã Nam', '2025', '14 x 20.5 cm', 'Bìa mềm', '382 trang')">
+                                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Hành Trình Khởi Nghiệp Tinh Gọn Trong Kỷ Nguyên Số</h3>
+                                <p class="book-author">Eric Ries</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">120.000 đ</span><span class="old-price">150.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Hành Trình Khởi Nghiệp Tinh Gọn Trong Kỷ Nguyên Số', 'Eric Ries', 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80', 'Cuốn sách mở ra một tư duy hoàn toàn mới về cách vận hành doanh nghiệp, tối ưu hóa chi phí và thử nghiệm sản phẩm tinh gọn.', 'Nguyễn Văn A', 'NXB Thế Giới', 'Nhã Nam', '2025', '14 x 20.5 cm', 'Bìa mềm', '382 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 2 (Văn học) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Rừng Na Uy - Ấn Bản Kỷ Niệm', 'Haruki Murakami', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Tác phẩm kinh điển khắc họa sâu sắc những hoài niệm, tình yêu và nỗi cô đơn lạc lối của tuổi trẻ thế hệ trước.', 'Trịnh Lữ', 'NXB Hội Nhà Văn', 'Nhã Nam', '2026', '15 x 24 cm', 'Bìa mềm có cánh', '450 trang')">
+                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Rừng Na Uy (Tiểu thuyết) - Ấn Bản Kỷ Niệm 2026</h3>
+                                <p class="book-author">Haruki Murakami</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">148.000 đ</span><span class="old-price">185.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Rừng Na Uy - Ấn Bản Kỷ Niệm', 'Haruki Murakami', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Tác phẩm kinh điển khắc họa sâu sắc những hoài niệm, tình yêu và nỗi cô đơn lạc lối của tuổi trẻ thế hệ trước.', 'Trịnh Lữ', 'NXB Hội Nhà Văn', 'Nhã Nam', '2026', '15 x 24 cm', 'Bìa mềm', '450 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 3 (Thiếu nhi) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Kính Vạn Hoa - Tập 1 (Ấn bản mới)', 'Nguyễn Nhật Ánh', 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80', 'Bộ truyện học trò gắn liền với tuổi thơ bao thế hệ Việt Nam, ghi lại những câu chuyện phá án vui nhộn, ấm áp.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2025', '13 x 20 cm', 'Bìa mềm', '280 trang')">
+                                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Kính Vạn Hoa - Tập 1: Quyển Sách Kỳ Bí (Ấn Bản Mới)</h3>
+                                <p class="book-author">Nguyễn Nhật Ánh</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">76.000 đ</span><span class="old-price">95.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Kính Vạn Hoa - Tập 1 (Ấn bản mới)', 'Nguyễn Nhật Ánh', 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80', 'Bộ truyện học trò gắn liền với tuổi thơ bao thế hệ Việt Nam, ghi lại những câu chuyện phá án vui nhộn, ấm áp.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2025', '13 x 20 cm', 'Bìa mềm', '280 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 4 (Ngoại văn) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Project Hail Mary (English Edition)', 'Andy Weir', 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80', 'An interstellar sci-fi thriller about a lone astronaut who must save humanity from an extinction-level threat.', 'Nguyên bản tiếng Anh', 'Ballantine Books', 'HMB Import', '2024', '11 x 18 cm', 'Bìa mềm pocket', '496 trang')">
+                                <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Project Hail Mary - Sci-Fi Foreign Fiction</h3>
+                                <p class="book-author">Andy Weir</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">235.000 đ</span><span class="old-price">290.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Project Hail Mary (English Edition)', 'Andy Weir', 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80', 'An interstellar sci-fi thriller about a lone astronaut who must save humanity from an extinction-level threat.', 'Nguyên bản tiếng Anh', 'Ballantine Books', 'HMB Import', '2024', '11 x 18 cm', 'Bìa mềm pocket', '496 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- --- TAB 1: SÁCH BÁN CHẠY / TRENDING (4 ĐẦU SÁCH) --- -->
+                <div class="book-grid" id="grid-tab-1">
+                    <!-- Cuốn 5 (Kỹ năng) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Tâm Lý Học Về Tiền - Kiếm Tiền, Giữ Tiền Và Hạnh Phúc', 'Morgan Housel', 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80', 'Cuốn sách khám phá mối quan hệ hành vi của con người với tiền bạc, mang lại góc nhìn tỉnh táo về tài chính.', 'Trần Văn B', 'NXB Lao Động', 'Alpha Books', '2024', '13 x 20.5 cm', 'Bìa mềm', '320 trang')">
+                                <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Tâm Lý Học Về Tiền - Kiếm Tiền, Giữ Tiền Và Hạnh Phúc</h3>
+                                <p class="book-author">Morgan Housel</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">142.000 đ</span><span class="old-price">189.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Tâm Lý Học Về Tiền - Kiếm Tiền, Giữ Tiền Và Hạnh Phúc', 'Morgan Housel', 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80', 'Cuốn sách khám phá mối quan hệ hành vi của con người với tiền bạc, mang lại góc nhìn tỉnh táo về tài chính.', 'Trần Văn B', 'NXB Lao Động', 'Alpha Books', '2024', '13 x 20.5 cm', 'Bìa mềm', '320 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 6 (Kinh tế/Marketing) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Hiệu Ứng Chim Mồi Trong Kinh Doanh', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Cuốn sách phân tích các đòn tâm lý học hành vi được áp dụng tinh vi trong marketing để thay đổi quyết định mua sắm.', 'Phạm Thanh Hương', 'NXB Công Thương', 'Nhất Nam', '2024', '14 x 20 cm', 'Bìa mềm', '215 trang')">
+                                <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Hiệu Ứng Chim Mồi - Nghệ Thuật Định Giá Trong Marketing</h3>
+                                <p class="book-author">Nhiều Tác Giả</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">79.000 đ</span><span class="old-price">98.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Hiệu Ứng Chim Mồi Trong Kinh Doanh', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Cuốn sách phân tích các đòn tâm lý học hành vi được áp dụng tinh vi trong marketing để thay đổi quyết định mua sắm.', 'Phạm Thanh Hương', 'NXB Công Thương', 'Nhất Nam', '2024', '14 x 20 cm', 'Bìa mềm', '215 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 7 (Tản văn) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Tìm Lại Bình Yên Trong Từng Giờ Phút Tản Văn Chữa Lành', 'Nhiều tác giả', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Tuyển tập tản văn sâu lắng xoa dịu những áp lực tinh thần cho người trẻ trong xã hội bộn bề.', 'Phan Thị C', 'NXB Văn Học', 'Skybooks', '2025', '12 x 19 cm', 'Bìa mềm', '240 trang')">
+                                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Tìm Lại Bình Yên Trong Từng Giờ Phút Tản Văn Chữa Lành</h3>
+                                <p class="book-author">Nhiều tác giả</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">85.000 đ</span><span class="old-price">110.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Tìm Lại Bình Yên Trong Từng Giờ Phút Tản Văn Chữa Lành', 'Nhiều tác giả', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Tuyển tập tản văn sâu lắng xoa dịu những áp lực tinh thần cho người trẻ trong xã hội bộn bề.', 'Phan Thị C', 'NXB Văn Học', 'Skybooks', '2025', '12 x 19 cm', 'Bìa mềm', '240 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 8 (Ngữ học) -> ĐÃ CẬP NHẬT ẢNH MỚI XỊN HƠN -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Giáo Trình Hán Ngữ Tích Hợp - Tập 1', 'Đại Học Ngôn Ngữ Bắc Kinh', 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80', 'Giáo trình chuẩn hóa cung cấp hệ thống từ vựng, ngữ pháp cơ bản dành cho người bắt đầu tự học tiếng Trung.', 'Đội ngũ chuyên gia', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '19 x 26 cm', 'Bìa mềm', '310 trang')">
+                                <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80" alt="Bìa sách Hán ngữ">
+                            </div>
+                            <div class="book-info">
+                                <h3>Giáo Trình Hán Ngữ Tích Hợp - Tự Học Toàn Diện Tập 1</h3>
+                                <p class="book-author">Đại Học Ngôn Ngữ Bắc Kinh</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">135.000 đ</span><span class="old-price">168.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Giáo Trình Hán Ngữ Tích Hợp - Tập 1', 'Đại Học Ngôn Ngữ Bắc Kinh', 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80', 'Giáo trình chuẩn hóa cung cấp hệ thống từ vựng, ngữ pháp cơ bản dành cho người bắt đầu tự học tiếng Trung.', 'Đội ngũ chuyên gia', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '19 x 26 cm', 'Bìa mềm', '310 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- --- TAB 2: ƯU ĐÃI TRONG NGÀY / FLASH SALE (4 ĐẦU SÁCH) --- -->
+                <div class="book-grid" id="grid-tab-2">
+                    <!-- Cuốn 9 (Kỹ năng phát triển bản thân) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Atomic Habits: Thay Đổi Tí Hon, Hiệu Quả Bất Ngờ', 'James Clear', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'Phương pháp xây dựng hệ thống thói quen tốt từ những hành động nhỏ nhặt tích lũy mỗi ngày.', 'Lê Hoàng D', 'NXB Trẻ', 'NXB Trẻ', '2024', '14.5 x 20.5 cm', 'Bìa cứng', '416 trang')">
+                                <img src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Atomic Habits: Thay Đổi Tí Hon, Hiệu Quả Bất Ngờ</h3>
+                                <p class="book-author">James Clear</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">100.000 đ</span><span class="old-price">200.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Atomic Habits: Thay Đổi Tí Hon, Hiệu Quả Bất Ngờ', 'James Clear', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'Phương pháp xây dựng hệ thống thói quen tốt từ những hành động nhỏ nhặt tích lũy mỗi ngày.', 'Lê Hoàng D', 'NXB Trẻ', 'NXB Trẻ', '2024', '14.5 x 20.5 cm', 'Bìa cứng', '416 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 10 (Sức khỏe) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Y Học Dinh Dưỡng - Những Điều Bác Sĩ Không Nói Với Bạn', 'Ray D. Strand', 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80', 'Cuốn sách làm sáng tỏ sức mạnh khôi phục sức khỏe của cơ thể thông qua bổ sung dinh dưỡng tối ưu chủ động.', 'Nguyễn Việt Long', 'NXB Hồng Đức', 'HMB Edu', '2025', '14 x 20.5 cm', 'Bìa mềm', '340 trang')">
+                                <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Y Học Dinh Dưỡng - Bảo Vệ Tối Ưu Sức Khỏe Chủ Động</h3>
+                                <p class="book-author">Ray D. Strand</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">95.000 đ</span><span class="old-price">190.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Y Học Dinh Dưỡng - Những Điều Bác Sĩ Không Nói Với Bạn', 'Ray D. Strand', 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80', 'Cuốn sách làm sáng tỏ sức mạnh khôi phục sức khỏe của cơ thể thông qua bổ sung dinh dưỡng tối ưu chủ động.', 'Nguyễn Việt Long', 'NXB Hồng Đức', 'HMB Edu', '2025', '14 x 20.5 cm', 'Bìa mềm', '340 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 11 (Thiếu nhi nuôi dạy con) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Vô Cùng Tàn Nhẫn Vô Cùng Yêu Thương', 'Sara Imas', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Phương pháp giáo dục con cái kết hợp đỉnh cao giữa tình yêu thương dịu dàng và kỷ luật thép của người mẹ Do Thái.', 'Hàn Phong', 'NXB Dân Trí', 'Alpha Books', '2024', '13.5 x 20.5 cm', 'Bìa mềm', '410 trang')">
+                                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Vô Cùng Tàn Nhẫn Vô Cùng Yêu Thương (Nuôi Dạy Con)</h3>
+                                <p class="book-author">Sara Imas</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">69.000 đ</span><span class="old-price">138.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Vô Cùng Tàn Nhẫn Vô Cùng Yêu Thương', 'Sara Imas', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Phương pháp giáo dục con cái kết hợp đỉnh cao giữa tình yêu thương dịu dàng và kỷ luật thép của người mẹ Do Thái.', 'Hàn Phong', 'NXB Dân Trí', 'Alpha Books', '2024', '13.5 x 20.5 cm', 'Bìa mềm', '410 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuốn 12 (Ngoại văn Non-fiction) -->
+                    <div class="book-card">
+                        <div>
+                            <div class="book-img-box" onclick="navigateToDetail('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'A provocative and grand narrative exploring the history of human species from evolution to modern global empires.', 'Nguyên bản tiếng Anh', 'Harper Perennial', 'HMB Import', '2023', '13 x 20 cm', 'Bìa mềm', '512 trang')">
+                                <img src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80" alt="Bìa sách">
+                            </div>
+                            <div class="book-info">
+                                <h3>Sapiens: A Brief History of Humankind (Non-fiction)</h3>
+                                <p class="book-author">Yuval Noah Harari</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="price-box"><span class="current-price">185.000 đ</span><span class="old-price">370.000 đ</span></div>
+                            <div class="cta-box">
+                                <button class="btn btn-outline">Thêm giỏ</button>
+                                <button class="btn btn-fill" style="background-color: var(--accent-color);" onclick="navigateToDetail('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'A provocative and grand narrative exploring the history of human species from evolution to modern global empires.', 'Nguyên bản tiếng Anh', 'Harper Perennial', 'HMB Import', '2023', '13 x 20 cm', 'Bìa mềm', '512 trang')">Mua ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- =======================================================
+         --- MÀN HÌNH 2: GIAO DIỆN XEM CHI TIẾT SÁCH (SPA) --- 
+         ====================================================== -->
+    <main id="detail-page-view">
+        <div class="container">
+            <button class="back-to-home-btn" onclick="navigateToHome()"><i class="fa-solid fa-arrow-left"></i> Quay lại trang chủ</button>
+
+            <div class="detail-wrapper">
+                <!-- Cột hình ảnh khổ lớn nghệ thuật -->
+                <div class="modal-gallery">
+                    <div class="main-img"><img id="detailImg" src="" alt="Bìa sách"></div>
+                    <div class="thumb-imgs">
+                        <div><img id="thumbImg1" src="" alt="Bìa trước"></div>
+                        <div><div style="text-align:center; font-size:10px; padding-top:18px; color:var(--gray); font-weight:600;">Bìa sau</div></div>
+                        <div><div style="text-align:center; font-size:10px; padding-top:18px; color:var(--gray); font-weight:600;">Bên trong</div></div>
+                    </div>
+                </div>
+
+                <!-- Cột thông tin chữ -->
+                <div class="info-detail">
+                    <h1 id="detailTitle">Tên Sách</h1>
+                    <div class="modal-book-author">Tác giả: <span id="detailAuthor" style="color:var(--primary-color);">...</span></div>
+                    
+                    <div class="blurb-box">
+                        <strong>Tóm tắt nội dung:</strong> <span id="detailBlurb">Nội dung tóm tắt...</span>
+                    </div>
+                    
+                    <!-- Lưới thông số kỹ thuật -->
+                    <div class="meta-info-grid">
+                        <div class="meta-item"><span class="meta-label">Dịch giả</span><span class="meta-value" id="detailTranslator">...</span></div>
+                        <div class="meta-item"><span class="meta-label">Nhà xuất bản</span><span class="meta-value" id="detailPublisher">...</span></div>
+                        <div class="meta-item"><span class="meta-label">Nhà phát hành</span><span class="meta-value" id="detailDistributor">...</span></div>
+                        <div class="meta-item"><span class="meta-label">Năm xuất bản</span><span class="meta-value" id="detailYear">...</span></div>
+                        <div class="meta-item"><span class="meta-label">Kích thước</span><span class="meta-value" id="detailSize">...</span></div>
+                        <div class="meta-item"><span class="meta-label">Loại bìa</span><span class="meta-value" id="detailCover">...</span></div>
+                        <div class="meta-item" id="fullWidthMeta" style="grid-column: span 2;"><span class="meta-label">Số trang</span><span class="meta-value" id="detailPages">...</span></div>
+                    </div>
+
+                    <!-- Cụm nút hành động -->
+                    <div class="detail-action-box">
+                        <button class="btn btn-outline"><i class="fa-solid fa-cart-shopping"></i> Thêm Vào Giỏ Hàng</button>
+                        <button class="btn btn-fill">Mua Ngay <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- --- FOOTER THƯƠNG HIỆU HMB AGENCY --- -->
+    <footer>
+        <div class="container footer-grid-pro">
+            <div class="footer-col brand">
+                <h3>HMB Agency</h3>
+                <p class="brand-desc">Đối tác thiết kế và phát triển giải pháp số toàn diện. Chúng tôi đồng hành cùng sự số hóa và nâng tầm nhận diện thương hiệu của bạn.</p>
+                <ul class="contact-info-list">
+                    <li><i class="fa-solid fa-phone"></i> Hotline: 0855 555 140</li>
+                    <li><i class="fa-solid fa-envelope"></i> Email: hmb.agency.group@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Danh mục</h3>
+                <ul class="footer-links-list">
+                    <li><a href="#" onclick="navigateToHome()">Trang chủ</a></li>
+                    <li><a href="#">Giới thiệu dịch vụ</a></li>
+                    <li><a href="#">Dịch vụ mũi nhọn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container footer-bottom-pro">
+            <div>&copy; 2026 <strong>HMB Agency</strong>. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- --- LOGIC JAVASCRIPT XOAY TUA TAB TỰ ĐỘNG SAU 7S & SPA --- -->
+    <script>
+        const homepageView = document.getElementById('homepage-view');
+        const detailPageView = document.getElementById('detail-page-view');
+        
+        let activeTabIndex = 0; 
+        const totalTabs = 3;    
+        let tabRotateInterval;  
+
+        // Hàm chuyển đổi tab
+        function switchTab(tabIndex) {
+            const buttons = document.querySelectorAll('.tab-btn');
+            const grids = document.querySelectorAll('.book-grid');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            grids.forEach(grid => grid.classList.remove('active'));
+
+            buttons[tabIndex].classList.add('active');
+            document.getElementById(`grid-tab-${tabIndex}`).classList.add('active');
+            
+            activeTabIndex = tabIndex; 
+        }
+
+        // Tạo vòng lặp xoay tua 7 giây
+        function startTabAutoRotation() {
+            tabRotateInterval = setInterval(() => {
+                let nextTabIndex = (activeTabIndex + 1) % totalTabs;
+                switchTab(nextTabIndex);
+            }, 7000); 
+        }
+
+        // Khi người dùng bấm click tab chủ động -> Reset lại thời gian 7 giây
+        function handleTabClick(tabIndex) {
+            switchTab(tabIndex);
+            clearInterval(tabRotateInterval);
+            startTabAutoRotation();
+        }
+
+        // Đổ dữ liệu động và ẩn hiện màn hình chi tiết sách (SPA)
+        function navigateToDetail(title, author, imgSrc, blurb, translator, publisher, distributor, year, size, cover, pages) {
+            document.getElementById('detailTitle').innerText = title;
+            document.getElementById('detailAuthor').innerText = author;
+            document.getElementById('detailImg').src = imgSrc;
+            document.getElementById('thumbImg1').src = imgSrc;
+            document.getElementById('detailBlurb').innerText = blurb;
+            document.getElementById('detailTranslator').innerText = translator;
+            document.getElementById('detailPublisher').innerText = publisher;
+            document.getElementById('detailDistributor').innerText = distributor;
+            document.getElementById('detailYear').innerText = year;
+            document.getElementById('detailSize').innerText = size;
+            document.getElementById('detailCover').innerText = cover;
+            document.getElementById('detailPages').innerText = pages;
+
+            if(window.innerWidth <= 768) {
+                document.getElementById('fullWidthMeta').style.gridColumn = "auto";
+            } else {
+                document.getElementById('fullWidthMeta').style.gridColumn = "span 2";
+            }
+
+            homepageView.style.display = 'none';
+            detailPageView.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Dừng xoay tua tab khi đang xem chi tiết
+            clearInterval(tabRotateInterval);
+        }
+
+        // Quay về trang chủ và kích hoạt lại luồng xoay tua tab tự động
+        function navigateToHome() {
+            detailPageView.style.display = 'none';
+            homepageView.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            clearInterval(tabRotateInterval);
+            startTabAutoRotation();
+        }
+
+        window.onload = function() {
+            startTabAutoRotation();
+        };
+    </script>
+</body>
+</html>
