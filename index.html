@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HMB Agency - Nhà Sách Trực Tuyến & Giải Pháp Số</title>
-    <!-- Nhúng Font Awesome để hiển thị các icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- CẤU HÌNH HỆ THỐNG & MÀU CHỦ ĐẠO (NAVY & ĐỎ ĐÔ) --- */
+
         :root {
-            --primary-color: #0B2545; /* Xanh dương đậm tri thức, thương hiệu HMB */
-            --accent-color: #8B0000;  /* Đỏ đô cổ điển tạo điểm nhấn */
+            --primary-color: #0B2545;
+            --accent-color: #8B0000;
             --text-color: #2D3748;
             --bg-light: #F7FAFC;
             --white: #FFFFFF;
@@ -32,14 +31,14 @@
             line-height: 1.6;
         }
 
-        /* --- KÍCH THƯỚC NỘI DUNG CHÍNH CHUẨN UI RỘNG RÃI --- */
+
         .container {
             width: 92%; 
             max-width: 1300px; 
             margin: 0 auto;
         }
 
-        /* --- HEADER & NAVIGATION --- */
+
         header {
             background-color: var(--primary-color);
             color: var(--white);
@@ -71,7 +70,7 @@
             margin-left: 5px;
             font-weight: 400;
         }
-        /* --- BANNER CHÀO HÈ --- */
+
         .hero-banner {
             background: linear-gradient(135deg, #13315C, #0B2545);
             color: var(--white);
@@ -109,7 +108,7 @@
             100% { transform: scale(1); }
         }
 
-        /* --- MÀN HÌNH 1: TRANG CHỦ --- */
+
         #homepage-view {
             display: block;
         }
@@ -150,7 +149,7 @@
             height: 2px;
             background-color: var(--primary-color);
         }
-/* Styling cho thanh tìm kiếm */
+
         .search-section { padding: 30px 0; display: flex; justify-content: center; }
         .search-wrapper { position: relative; width: 100%; max-width: 600px; }
         .search-input { 
@@ -202,7 +201,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hệ thống kệ sách cố định */
+
         .bookshelf-section {
             padding: 10px 0 60px 0;
         }
@@ -218,7 +217,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Card Sách Chung */
+
         .book-card {
             background: var(--white);
             border: 1px solid var(--border);
@@ -259,7 +258,7 @@
             font-size: 14.5px;
             font-weight: 600;
             margin-bottom: 6px;
-            min-height: 40px; /* Đảm bảo đủ chỗ cho 2 dòng */
+            min-height: 40px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -312,7 +311,7 @@
         .btn-outline { background-color: transparent; color: var(--primary-color); border: 1px solid var(--primary-color); }
         .btn-fill { background-color: var(--primary-color); color: var(--white); }
 
-        /* --- MAN HINH 2: CHI TIẾT SÁCH (SPA) --- */
+
         #detail-page-view {
             display: none; 
             padding: 50px 0 80px 0;
@@ -451,7 +450,7 @@
         .footer-bottom-pro { margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; }
         .footer-bottom-pro a { color: var(--text-muted); text-decoration: none; margin-left: 20px; }
 
-        /* --- RESPONSIVE --- */
+
         @media (max-width: 992px) {
             .book-grid, .book-grid-fixed { grid-template-columns: repeat(3, 1fr); gap: 20px; }
             .detail-wrapper { grid-template-columns: 1fr; gap: 35px; padding: 10px; }
@@ -471,19 +470,17 @@
 </head>
 <body>
 
-    <!-- --- HEADER --- -->
+
     <header>
         <div class="container header-container">
             <div class="logo" onclick="navigateToHome()">HMB<span>Agency</span></div>
         </div>
     </header>
 
-    <!-- =======================================================
-         --- MÀN HÌNH 1: TRANG CHỦ (CHỨA CẢ BANNER CHÀO HÈ) --- 
-         ======================================================= -->
+
     <main id="homepage-view">
         
-        <!-- ĐƯA BANNER VÀO BÊN TRONG TRANG CHỦ ĐỂ ẨN ĐI KHI XEM CHI TIẾT SÁCH -->
+
         <section class="hero-banner">
             <div class="container">
                 <h1>HỘI SÁCH CHÀO HÈ 2026 - HMB AGENCY</h1>
@@ -491,7 +488,7 @@
             </div>
         </section>
 
-        <!-- PHẦN A: KHỐI SÁCH XOAY TUA ĐỊNH KỲ SAU 7 GIÂY -->
+
         <section class="tabs-section">
             <div class="container">
                 <div class="tab-headers">
@@ -500,7 +497,7 @@
                     <button class="tab-btn" onclick="handleTabClick(2)">Ưu Đãi Trong Ngày <span class="countdown">02:45:12</span></button>
                 </div>
 
-                <!-- --- TAB 0: SÁCH MỚI PHÁT HÀNH --- -->
+
                 <div class="book-grid active" id="grid-tab-0">
                     <div class="book-card">
                         <div>
@@ -579,7 +576,7 @@
                     </div>
                 </div>
 
-                <!-- --- TAB 1: SÁCH BÁN CHẠY --- -->
+
                 <div class="book-grid" id="grid-tab-1">
                     <div class="book-card">
                         <div>
@@ -658,7 +655,7 @@
                     </div>
                 </div>
 
-                <!-- --- TAB 2: ƯU ĐÃI TRONG NGÀY --- -->
+
                 <div class="book-grid" id="grid-tab-2">
                     <div class="book-card">
                         <div>
@@ -744,11 +741,11 @@
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 </div>
             </section>
-        <!-- PHẦN B: HỆ THỐNG KỆ SÁCH CỐ ĐỊNH HIỂN THỊ LIÊN TỤC -->
+
         <section class="bookshelf-section">
             <div class="container">
                 
-                <!-- --- KỆ 1: VĂN HỌC TRONG NƯỚC (8 CUỐN CỐ ĐỊNH) --- -->
+
                 <div class="shelf-title">Văn Học Chọn Lọc (Tiểu Thuyết, Truyện Ngắn, Thơ, Tản Văn)</div>
                 <div class="book-grid-fixed" style="margin-bottom: 40px;">
                     <!-- Cuốn 1 -->
@@ -915,7 +912,7 @@
                     </div>
                 </div>
 
-                <!-- --- KỆ 2: KINH TẾ & KHỞI NGHIỆP (8 CUỐN CỐ ĐỊNH) --- -->
+
                 <div class="shelf-title">Kinh Tế & Khởi Nghiệp (Quản Trị, Khởi Nghiệp, Tài Chính Cá Nhân, Marketing)</div>
                 <div class="book-grid-fixed" style="margin-bottom: 40px;">
                     <!-- Cuốn 9 -->
@@ -1082,7 +1079,7 @@
                     </div>
                 </div>
 
-                <!-- --- KỆ 3: GIÁO TRÌNH - THIẾU NHI - NGOẠI NGỮ (8 CUỐN CỐ ĐỊNH) --- -->
+
                 <div class="shelf-title">Giáo Trình, Sách Ngữ Học & Thiếu Nhi (Tiếng Anh, Nhật, Hàn, Chuyên Ngành, Nuôi Dạy Con)</div>
                 <div class="book-grid-fixed" style="margin-bottom: 40px;">
                     <!-- Cuốn 17 -->
@@ -1252,16 +1249,13 @@
         </section>
     </main>
 
-    <!-- =======================================================
-         --- MÀN HÌNH 2: GIAO DIỆN XEM CHI TIẾT SÁCH PHẲNG (SPA) --- 
-         ====================================================== -->
     <main id="detail-page-view">
         <div class="container">
             <button class="back-to-home-btn" onclick="navigateToHome()"><i class="fa-solid fa-arrow-left"></i> Quay lại trang chủ</button>
 
-            <!-- Tinh chỉnh loại bỏ khung viền ngoài và đổ bóng, nền trong suốt đắt giá -->
+
             <div class="detail-wrapper">
-                <!-- Cột hình ảnh khổ lớn nghệ thuật -->
+
                 <div class="modal-gallery">
                     <div class="main-img"><img id="detailImg" src="" alt="Bìa sách"></div>
                     <div class="thumb-imgs">
@@ -1271,7 +1265,7 @@
                     </div>
                 </div>
 
-                <!-- Cột thông tin chữ dãn cách thoáng đãng -->
+
                 <div class="info-detail">
                     <h1 id="detailTitle">Tên Sách</h1>
                     <div class="modal-book-author">Tác giả: <span id="detailAuthor" style="color:var(--primary-color);">...</span></div>
@@ -1280,7 +1274,7 @@
                         <strong>Tóm tắt nội dung:</strong> <span id="detailBlurb">Nội dung tóm tắt...</span>
                     </div>
                     
-                    <!-- Lưới thông số kỹ thuật đã sửa lỗi co dãn chữ -->
+
                     <div class="meta-info-grid">
                         <div class="meta-item"><span class="meta-label">Dịch giả</span><span class="meta-value" id="detailTranslator">...</span></div>
                         <div class="meta-item"><span class="meta-label">Nhà xuất bản</span><span class="meta-value" id="detailPublisher">...</span></div>
@@ -1300,7 +1294,7 @@
         </div>
     </main>
 
-    <!-- --- FOOTER THƯƠNG HIỆU HMB AGENCY --- -->
+
     <footer>
         <div class="container footer-grid-pro">
             <div class="footer-col brand">
@@ -1325,7 +1319,7 @@
         </div>
     </footer>
 
-    <!-- --- HỆ THỐNG SCRIPT KHỞI CHẠY --- -->
+
     <script>
         const homepageView = document.getElementById('homepage-view');
         const detailPageView = document.getElementById('detail-page-view');      
