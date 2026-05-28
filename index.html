@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HMB Agency - Nhà Sách Trực Tuyến & Giải Pháp Số</title>
-    <!-- Nhúng Font Awesome để hiển thị các icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- CẤU HÌNH HỆ THỐNG & MÀU CHỦ ĐẠO (NAVY & ĐỎ ĐÔ) --- */
@@ -71,9 +70,21 @@
             font-weight: 400;
         }
 
+        /* Nút 3 gạch mặc định ẨN trên máy tính (Desktop) */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1100; /* Đảm bảo nổi trên lớp phủ di động */
+        }
+
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
         }
 
         nav ul li {
@@ -93,7 +104,7 @@
             color: #FFD700;
         }
 
-        /* Dropdown Menu Mega */
+        /* Dropdown Menu Mega trên PC */
         .dropdown-content {
             display: none;
             position: absolute;
@@ -433,7 +444,9 @@
         .footer-bottom-pro { margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; }
         .footer-bottom-pro a { color: var(--text-muted); text-decoration: none; margin-left: 20px; }
 
-        /* --- RESPONSIVE --- */
+        /* =======================================================
+           --- HỆ THỐNG RESPONSIVE & MOBILE HAMBURGER MENU --- 
+           ======================================================= */
         @media (max-width: 1200px) {
             .detail-wrapper { gap: 30px; }
             .main-img { min-height: 380px; }
@@ -445,8 +458,55 @@
             .main-img img { max-height: 280px; }
         }
         @media (max-width: 768px) {
-            nav { display: none; }
+            /* Hiện nút 3 gạch */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* Biến nav menu thành sidebar vuốt trượt từ phải qua trái trên Mobile */
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Mặc định giấu sang bên phải */
+                width: 280px;
+                height: 100vh;
+                background-color: var(--primary-color);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+                padding: 80px 30px 30px 30px;
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                z-index: 1050;
+            }
+
+            /* Class kích hoạt mở menu trượt ra */
+            nav.open {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 25px;
+                width: 100%;
+            }
+
+            nav ul li a {
+                font-size: 18px; /* Chữ to hơn trên điện thoại để dễ click */
+                display: block;
+                padding: 5px 0;
+            }
+
+            /* Tắt tính năng Mega Menu cũ trên mobile */
+            .dropdown-content {
+                display: none !important; 
+            }
+
+            /* Responsive các khu vực khác */
             .hero-banner h1 { font-size: 26px; }
+            .tab-headers { overflow-x: auto; justify-content: flex-start; white-space: nowrap; padding-bottom: 5px; }
             .book-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .book-img-box { height: 180px; }
             .footer-grid-pro { flex-direction: column; gap: 35px; }
@@ -461,13 +521,17 @@
 </head>
 <body>
 
-    <!-- --- HEADER --- -->
     <header>
         <div class="container header-container">
             <div class="logo" onclick="navigateToHome()">HMB<span>Agency</span></div>
-            <nav>
+            
+            <button class="menu-toggle" id="menuToggleBtn" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav id="mobileNav">
                 <ul>
-                    <li><a href="#" onclick="navigateToHome()">Trang Chủ</a></li>
+                    <li><a href="#" onclick="navigateToHomeAndCloseMenu()">Trang Chủ</a></li>
                     <li>
                         <a href="#">Sách Trong Nước ▼</a>
                         <div class="dropdown-content">
@@ -490,7 +554,6 @@
         </div>
     </header>
 
-    <!-- --- BANNER --- -->
     <section class="hero-banner">
         <div class="container">
             <h1>HỘI SÁCH CHÀO HÈ 2026 - HMB AGENCY</h1>
@@ -499,9 +562,6 @@
         </div>
     </section>
 
-    <!-- =======================================================
-         --- MÀN HÌNH 1: TRANG CHỦ (HỆ THỐNG 12 ĐẦU SÁCH MỚI) --- 
-         ======================================================= -->
     <main id="homepage-view">
         <section class="tabs-section">
             <div class="container">
@@ -512,9 +572,7 @@
                     <button class="tab-btn" onclick="handleTabClick(2)">Ưu Đãi Trong Ngày <span class="countdown">02:45:12</span></button>
                 </div>
 
-                <!-- --- TAB 0: SÁCH MỚI PHÁT HÀNH (4 ĐẦU SÁCH) --- -->
                 <div class="book-grid active" id="grid-tab-0">
-                    <!-- Cuốn 1 (Kinh tế) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Hành Trình Khởi Nghiệp Tinh Gọn Trong Kỷ Nguyên Số', 'Eric Ries', 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80', 'Cuốn sách mở ra một tư duy hoàn toàn mới về cách vận hành doanh nghiệp, tối ưu hóa chi phí và thử nghiệm sản phẩm tinh gọn.', 'Nguyễn Văn A', 'NXB Thế Giới', 'Nhã Nam', '2025', '14 x 20.5 cm', 'Bìa mềm', '382 trang')">
@@ -534,7 +592,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 2 (Văn học) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Rừng Na Uy - Ấn Bản Kỷ Niệm', 'Haruki Murakami', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Tác phẩm kinh điển khắc họa sâu sắc những hoài niệm, tình yêu và nỗi cô đơn lạc lối của tuổi trẻ thế hệ trước.', 'Trịnh Lữ', 'NXB Hội Nhà Văn', 'Nhã Nam', '2026', '15 x 24 cm', 'Bìa mềm có cánh', '450 trang')">
@@ -554,7 +611,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 3 (Thiếu nhi) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Kính Vạn Hoa - Tập 1 (Ấn bản mới)', 'Nguyễn Nhật Ánh', 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80', 'Bộ truyện học trò gắn liền với tuổi thơ bao thế hệ Việt Nam, ghi lại những câu chuyện phá án vui nhộn, ấm áp.', 'Không có', 'NXB Trẻ', 'NXB Trẻ', '2025', '13 x 20 cm', 'Bìa mềm', '280 trang')">
@@ -574,7 +630,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 4 (Ngoại văn) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Project Hail Mary (English Edition)', 'Andy Weir', 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80', 'An interstellar sci-fi thriller about a lone astronaut who must save humanity from an extinction-level threat.', 'Nguyên bản tiếng Anh', 'Ballantine Books', 'HMB Import', '2024', '11 x 18 cm', 'Bìa mềm pocket', '496 trang')">
@@ -595,9 +650,7 @@
                     </div>
                 </div>
 
-                <!-- --- TAB 1: SÁCH BÁN CHẠY / TRENDING (4 ĐẦU SÁCH) --- -->
                 <div class="book-grid" id="grid-tab-1">
-                    <!-- Cuốn 5 (Kỹ năng) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Tâm Lý Học Về Tiền - Kiếm Tiền, Giữ Tiền Và Hạnh Phúc', 'Morgan Housel', 'https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80', 'Cuốn sách khám phá mối quan hệ hành vi của con người với tiền bạc, mang lại góc nhìn tỉnh táo về tài chính.', 'Trần Văn B', 'NXB Lao Động', 'Alpha Books', '2024', '13 x 20.5 cm', 'Bìa mềm', '320 trang')">
@@ -617,7 +670,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 6 (Kinh tế/Marketing) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Hiệu Ứng Chim Mồi Trong Kinh Doanh', 'Nhiều Tác Giả', 'https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80', 'Cuốn sách phân tích các đòn tâm lý học hành vi được áp dụng tinh vi trong marketing để thay đổi quyết định mua sắm.', 'Phạm Thanh Hương', 'NXB Công Thương', 'Nhất Nam', '2024', '14 x 20 cm', 'Bìa mềm', '215 trang')">
@@ -637,7 +689,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 7 (Tản văn) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Tìm Lại Bình Yên Trong Từng Giờ Phút Tản Văn Chữa Lành', 'Nhiều tác giả', 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=400&q=80', 'Tuyển tập tản văn sâu lắng xoa dịu những áp lực tinh thần cho người trẻ trong xã hội bộn bề.', 'Phan Thị C', 'NXB Văn Học', 'Skybooks', '2025', '12 x 19 cm', 'Bìa mềm', '240 trang')">
@@ -657,7 +708,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 8 (Ngữ học) -> ĐÃ CẬP NHẬT ẢNH MỚI XỊN HƠN -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Giáo Trình Hán Ngữ Tích Hợp - Tập 1', 'Đại Học Ngôn Ngữ Bắc Kinh', 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=400&q=80', 'Giáo trình chuẩn hóa cung cấp hệ thống từ vựng, ngữ pháp cơ bản dành cho người bắt đầu tự học tiếng Trung.', 'Đội ngũ chuyên gia', 'NXB Đại Học Quốc Gia', 'MCBooks', '2025', '19 x 26 cm', 'Bìa mềm', '310 trang')">
@@ -678,9 +728,7 @@
                     </div>
                 </div>
 
-                <!-- --- TAB 2: ƯU ĐÃI TRONG NGÀY / FLASH SALE (4 ĐẦU SÁCH) --- -->
                 <div class="book-grid" id="grid-tab-2">
-                    <!-- Cuốn 9 (Kỹ năng phát triển bản thân) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Atomic Habits: Thay Đổi Tí Hon, Hiệu Quả Bất Ngờ', 'James Clear', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'Phương pháp xây dựng hệ thống thói quen tốt từ những hành động nhỏ nhặt tích lũy mỗi ngày.', 'Lê Hoàng D', 'NXB Trẻ', 'NXB Trẻ', '2024', '14.5 x 20.5 cm', 'Bìa cứng', '416 trang')">
@@ -700,7 +748,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 10 (Sức khỏe) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Y Học Dinh Dưỡng - Những Điều Bác Sĩ Không Nói Với Bạn', 'Ray D. Strand', 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=400&q=80', 'Cuốn sách làm sáng tỏ sức mạnh khôi phục sức khỏe của cơ thể thông qua bổ sung dinh dưỡng tối ưu chủ động.', 'Nguyễn Việt Long', 'NXB Hồng Đức', 'HMB Edu', '2025', '14 x 20.5 cm', 'Bìa mềm', '340 trang')">
@@ -720,7 +767,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 11 (Thiếu nhi nuôi dạy con) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Vô Cùng Tàn Nhẫn Vô Cùng Yêu Thương', 'Sara Imas', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80', 'Phương pháp giáo dục con cái kết hợp đỉnh cao giữa tình yêu thương dịu dàng và kỷ luật thép của người mẹ Do Thái.', 'Hàn Phong', 'NXB Dân Trí', 'Alpha Books', '2024', '13.5 x 20.5 cm', 'Bìa mềm', '410 trang')">
@@ -740,7 +786,6 @@
                         </div>
                     </div>
 
-                    <!-- Cuốn 12 (Ngoại văn Non-fiction) -->
                     <div class="book-card">
                         <div>
                             <div class="book-img-box" onclick="navigateToDetail('Sapiens: A Brief History of Humankind', 'Yuval Noah Harari', 'https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80', 'A provocative and grand narrative exploring the history of human species from evolution to modern global empires.', 'Nguyên bản tiếng Anh', 'Harper Perennial', 'HMB Import', '2023', '13 x 20 cm', 'Bìa mềm', '512 trang')">
@@ -765,15 +810,11 @@
         </section>
     </main>
 
-    <!-- =======================================================
-         --- MÀN HÌNH 2: GIAO DIỆN XEM CHI TIẾT SÁCH (SPA) --- 
-         ====================================================== -->
     <main id="detail-page-view">
         <div class="container">
             <button class="back-to-home-btn" onclick="navigateToHome()"><i class="fa-solid fa-arrow-left"></i> Quay lại trang chủ</button>
 
             <div class="detail-wrapper">
-                <!-- Cột hình ảnh khổ lớn nghệ thuật -->
                 <div class="modal-gallery">
                     <div class="main-img"><img id="detailImg" src="" alt="Bìa sách"></div>
                     <div class="thumb-imgs">
@@ -783,7 +824,6 @@
                     </div>
                 </div>
 
-                <!-- Cột thông tin chữ -->
                 <div class="info-detail">
                     <h1 id="detailTitle">Tên Sách</h1>
                     <div class="modal-book-author">Tác giả: <span id="detailAuthor" style="color:var(--primary-color);">...</span></div>
@@ -792,7 +832,6 @@
                         <strong>Tóm tắt nội dung:</strong> <span id="detailBlurb">Nội dung tóm tắt...</span>
                     </div>
                     
-                    <!-- Lưới thông số kỹ thuật -->
                     <div class="meta-info-grid">
                         <div class="meta-item"><span class="meta-label">Dịch giả</span><span class="meta-value" id="detailTranslator">...</span></div>
                         <div class="meta-item"><span class="meta-label">Nhà xuất bản</span><span class="meta-value" id="detailPublisher">...</span></div>
@@ -803,7 +842,6 @@
                         <div class="meta-item" id="fullWidthMeta" style="grid-column: span 2;"><span class="meta-label">Số trang</span><span class="meta-value" id="detailPages">...</span></div>
                     </div>
 
-                    <!-- Cụm nút hành động -->
                     <div class="detail-action-box">
                         <button class="btn btn-outline"><i class="fa-solid fa-cart-shopping"></i> Thêm Vào Giỏ Hàng</button>
                         <button class="btn btn-fill">Mua Ngay <i class="fa-solid fa-arrow-right"></i></button>
@@ -813,7 +851,6 @@
         </div>
     </main>
 
-    <!-- --- FOOTER THƯƠNG HIỆU HMB AGENCY --- -->
     <footer>
         <div class="container footer-grid-pro">
             <div class="footer-col brand">
@@ -827,7 +864,7 @@
             <div class="footer-col">
                 <h3>Danh mục</h3>
                 <ul class="footer-links-list">
-                    <li><a href="#" onclick="navigateToHome()">Trang chủ</a></li>
+                    <li><a href="#" onclick="navigateToHomeAndCloseMenu()">Trang chủ</a></li>
                     <li><a href="#">Giới thiệu dịch vụ</a></li>
                     <li><a href="#">Dịch vụ mũi nhọn</a></li>
                 </ul>
@@ -838,16 +875,39 @@
         </div>
     </footer>
 
-    <!-- --- LOGIC JAVASCRIPT XOAY TUA TAB TỰ ĐỘNG SAU 7S & SPA --- -->
     <script>
         const homepageView = document.getElementById('homepage-view');
         const detailPageView = document.getElementById('detail-page-view');
+        const mobileNav = document.getElementById('mobileNav');
+        const menuToggleBtn = document.getElementById('menuToggleBtn');
         
         let activeTabIndex = 0; 
         const totalTabs = 3;    
         let tabRotateInterval;  
 
-        // Hàm chuyển đổi tab
+        // --- 1. LOGIC MENUBAR 3 GẠCH TRÊN MOBILE ---
+        function toggleMobileMenu() {
+            mobileNav.classList.toggle('open');
+            
+            // Thay đổi icon từ 3 gạch (bars) thành nút đóng (xmark) để tăng trải nghiệm trực quan
+            const icon = menuToggleBtn.querySelector('i');
+            if (mobileNav.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        function navigateToHomeAndCloseMenu() {
+            navigateToHome();
+            if (mobileNav.classList.contains('open')) {
+                toggleMobileMenu(); // Đóng thanh menu sau khi click chọn link điều hướng
+            }
+        }
+
+        // --- 2. LOGIC XOAY TUA TAB TỰ ĐỘNG ---
         function switchTab(tabIndex) {
             const buttons = document.querySelectorAll('.tab-btn');
             const grids = document.querySelectorAll('.book-grid');
@@ -861,7 +921,6 @@
             activeTabIndex = tabIndex; 
         }
 
-        // Tạo vòng lặp xoay tua 7 giây
         function startTabAutoRotation() {
             tabRotateInterval = setInterval(() => {
                 let nextTabIndex = (activeTabIndex + 1) % totalTabs;
@@ -869,14 +928,13 @@
             }, 7000); 
         }
 
-        // Khi người dùng bấm click tab chủ động -> Reset lại thời gian 7 giây
         function handleTabClick(tabIndex) {
             switchTab(tabIndex);
             clearInterval(tabRotateInterval);
             startTabAutoRotation();
         }
 
-        // Đổ dữ liệu động và ẩn hiện màn hình chi tiết sách (SPA)
+        // --- 3. ĐIỀU HƯỚNG MÀN HÌNH CHI TIẾT SÁCH (SPA) ---
         function navigateToDetail(title, author, imgSrc, blurb, translator, publisher, distributor, year, size, cover, pages) {
             document.getElementById('detailTitle').innerText = title;
             document.getElementById('detailAuthor').innerText = author;
@@ -901,18 +959,16 @@
             detailPageView.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            // Dừng xoay tua tab khi đang xem chi tiết
-            clearInterval(tabRotateInterval);
+            clearInterval(tabRotateInterval); // Tạm ngắt đếm giây khi xem chi tiết sách
         }
 
-        // Quay về trang chủ và kích hoạt lại luồng xoay tua tab tự động
         function navigateToHome() {
             detailPageView.style.display = 'none';
             homepageView.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
             clearInterval(tabRotateInterval);
-            startTabAutoRotation();
+            startTabAutoRotation(); // Chạy lại luồng xoay tua khi về trang chủ
         }
 
         window.onload = function() {
