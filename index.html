@@ -514,9 +514,6 @@
     <header>
         <div class="container header-container">
             <div class="logo" onclick="navigateToHome()">HMB<span>Agency</span></div>
-            <button class="menu-toggle" id="menuToggleBtn" onclick="toggleMobileMenu()">
-                <i class="fa-solid fa-bars"></i>
-            </button>
         </div>
     </header>
 
@@ -1371,22 +1368,11 @@
     <script>
         const homepageView = document.getElementById('homepage-view');
         const detailPageView = document.getElementById('detail-page-view');
-        const mobileNav = document.getElementById('mobileNav');
-        const menuToggleBtn = document.getElementById('menuToggleBtn');
         
         let activeTabIndex = 0; 
         const totalTabs = 3;    
         let tabRotateInterval;  
 
-        function toggleMobileMenu() {
-            mobileNav.classList.toggle('open');
-            const icon = menuToggleBtn.querySelector('i');
-            if (mobileNav.classList.contains('open')) {
-                icon.className = 'fa-solid fa-xmark';
-            } else {
-                icon.className = 'fa-solid fa-bars';
-            }
-        }
 
         function navigateToHomeAndCloseMenu() {
             navigateToHome();
