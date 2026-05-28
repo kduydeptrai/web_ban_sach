@@ -480,6 +480,20 @@
             .detail-wrapper { grid-template-columns: 1fr; gap: 35px; padding: 10px; }
             .main-img { min-height: 360px; }
         }
+        @media (max-width: 768px) {
+            nav { position: fixed; top: 0; right: -100%; width: 260px; height: 100vh; background-color: var(--primary-color); padding: 80px 30px; transition: right 0.4s ease; z-index: 1050; }
+            nav.open { right: 0; }
+            nav ul { flex-direction: column; align-items: flex-start; }
+            nav ul li { margin-left: 0; margin-bottom: 20px; }
+            .hero-banner h1 { font-size: 26px; }
+            .tab-headers { overflow-x: auto; justify-content: flex-start; white-space: nowrap; padding-bottom: 5px; }
+            .book-grid, .book-grid-fixed { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .book-img-box { height: 180px; }
+            .footer-grid-pro { flex-direction: column; gap: 35px; }
+            .detail-wrapper { padding: 25px 20px; }
+            .main-img { min-height: 220px; } .main-img img { max-height: 200px; }
+            .meta-info-grid { grid-template-columns: 1fr; gap: 12px; } .detail-action-box { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -1341,7 +1355,7 @@
     <!-- --- HỆ THỐNG SCRIPT KHỞI CHẠY --- -->
     <script>
         const homepageView = document.getElementById('homepage-view');
-        const detailPageView = document.getElementById('detail-page-view');
+        const detailPageView = document.getElementById('detail-page-view');      
         let activeTabIndex = 0; 
         const totalTabs = 3;    
         let tabRotateInterval;  
